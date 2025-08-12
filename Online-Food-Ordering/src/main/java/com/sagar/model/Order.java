@@ -10,9 +10,13 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+// it is used to designate a java class as a persistent entity. This means that instances of this class can be
+// mapped to rows in rdb table
 @Data
+// it is used to set getters and setters to the class fields and nonstatic variables.
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "orders")
 public class Order {
 
     @Id
@@ -24,6 +28,8 @@ public class Order {
 
     @ManyToOne
     @JsonIgnore
+    // it is used to instruct the json library to exclude a specific field or method during the serialization of the
+    // java object into json or deserialization of json into java
     private Restaurant restaurant;
 
     private Long totalAmount;

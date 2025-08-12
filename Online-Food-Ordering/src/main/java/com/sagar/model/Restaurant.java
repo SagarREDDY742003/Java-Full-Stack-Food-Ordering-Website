@@ -51,6 +51,6 @@ public class Restaurant {
     private boolean open;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     private List<Food> foods = new ArrayList<>();
 }
