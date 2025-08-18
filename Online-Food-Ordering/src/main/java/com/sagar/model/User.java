@@ -23,7 +23,7 @@ public class User {
     private String fullName;
     private String email;
     private String password;
-    private USER_ROLE role;
+    private USER_ROLE role = USER_ROLE.ROLE_CUSTOMER;
 
     // when ever fetching user we don't need order list so we are using jsonIgnore
     // we will write separate api to fetch all orders
