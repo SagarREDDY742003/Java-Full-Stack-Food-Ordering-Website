@@ -25,7 +25,7 @@ public class AppConfig {
         // This method configures the security filter chain, which defines how HTTP requests are secured.
 
         http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //Uses stateless sessions, meaning no session is stored on the server. This is typical for APIs using JWT (JSON Web Tokens).
-                .authorizeHttpRequests(Authorized -> Authorized
+                .authorizeHttpRequests(Authorize -> Authorize
                         .requestMatchers("/api/admin/**").hasAnyRole("RESTAURANT_OWNER","ADMIN") //  "/api/admin/**" Only accessible to users with roles RESTAURANT_OWNER or ADMIN.
                         .requestMatchers("/api/**").authenticated() //  "/api/**" Requires authentication.
                         .anyRequest().permitAll()//  All other requests: Allowed without authentication.
