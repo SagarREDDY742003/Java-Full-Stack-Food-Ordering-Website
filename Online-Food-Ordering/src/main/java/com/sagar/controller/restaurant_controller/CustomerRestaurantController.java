@@ -3,7 +3,6 @@ package com.sagar.controller.restaurant_controller;
 import com.sagar.dto.RestaurantDto;
 import com.sagar.model.Restaurant;
 import com.sagar.model.User;
-import com.sagar.request.CreateRestaurantRequest;
 import com.sagar.service.UserService;
 import com.sagar.service.restaurant_services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
