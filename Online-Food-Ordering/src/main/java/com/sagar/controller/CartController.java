@@ -2,8 +2,10 @@ package com.sagar.controller;
 
 import com.sagar.model.Cart;
 import com.sagar.model.CartItem;
+import com.sagar.model.User;
 import com.sagar.request.AddCartItemRequest;
 import com.sagar.request.UpdateCartItemRequest;
+import com.sagar.service.UserService;
 import com.sagar.service.cart_service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,9 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private UserService userService;
 
     @PutMapping("/cart/add")
     public ResponseEntity<CartItem> addItemToCart(
@@ -51,7 +56,8 @@ public class CartController {
     public ResponseEntity<Cart> clearCart(
             @RequestHeader("Authorization") String jwt) throws Exception {
 
-        Cart cart = cartService.clearCart(jwt);
+        User user = userService.findUserByJwtToken(jwt);
+        Cart cart = cartService.clearCart(user.getId());
 
         return new ResponseEntity<>(cart, HttpStatus.OK);
 
@@ -61,7 +67,8 @@ public class CartController {
     public ResponseEntity<Cart> findUserCart(
             @RequestHeader("Authorization") String jwt) throws Exception {
 
-        Cart cart = cartService.findCartByUserId(jwt);
+        User user = userService.findUserByJwtToken(jwt);
+        Cart cart = cartService.findCartByUserId(user.getId());
 
         return new ResponseEntity<>(cart, HttpStatus.OK);
 
