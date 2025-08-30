@@ -1,10 +1,18 @@
+import { ThemeProvider } from '@emotion/react';
 import './App.css';
+import Navbar from './component/Navbar/Navbar';
+import { darkTheme } from './theme/DarkTheme';
+import { CssBaseline } from '@mui/material';
+import Home from './component/Home/Home';
 
 function App() {
   return (
-    <div className="App">
-      <h1 className='text-blue-950'>Hello everyone</h1>
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Navbar/>
+      <Home/>
+      
+    </ThemeProvider>
   );
 }
 
