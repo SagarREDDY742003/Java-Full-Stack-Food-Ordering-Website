@@ -3,15 +3,16 @@ import './App.css';
 import Navbar from './component/Navbar/Navbar';
 import { darkTheme } from './theme/DarkTheme';
 import { CssBaseline } from '@mui/material';
-import Home from './component/Home/Home';
+// import Home from './component/Home/Home';
+import RestaurantDetails from './component/Restaurant/RestaurantDetails';
 
 function App() {
   return (
     <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <Navbar/>
-      <Home/>
-      
+        <CssBaseline />
+        <Navbar/>
+        {/* <Home/> */}
+        <RestaurantDetails/>
     </ThemeProvider>
   );
 }
