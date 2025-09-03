@@ -1,4 +1,5 @@
-import { Divider, FormControl, FormControlLabel, Grid, Radio, RadioGroup, Typography } from '@mui/material'
+import { Divider, FormControl, FormControlLabel, Radio, RadioGroup, Typography, Grid } from '@mui/material'
+
 import { useState } from 'react'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -30,13 +31,13 @@ const RestaurantDetails = () => {
 
             <div>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} lg={12}>
+                    <Grid item lg={12} >
                         <img src="https://images.pexels.com/photos/791810/pexels-photo-791810.jpeg" alt="" className='w-full h-[40vh] object-cover' />
                     </Grid>
-                    <Grid item xs={12} lg={6}>
+                    <Grid item lg={6} xs={12}>
                         <img className="w-full h-[40vh] object-cover" src="https://images.pexels.com/photos/1237073/pexels-photo-1237073.jpeg" alt=''  />
                     </Grid>
-                    <Grid item xs={12} lg={6}  > 
+                    <Grid item lg={6} xs={12}> 
                         <img className="w-full h-[40vh] object-cover" src="https://images.pexels.com/photos/903376/pexels-photo-903376.jpeg" alt="" />
                     </Grid>
                 </Grid>
