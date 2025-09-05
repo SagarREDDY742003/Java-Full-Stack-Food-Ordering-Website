@@ -3,8 +3,20 @@ import './App.css';
 import { darkTheme } from './theme/DarkTheme';
 import { CssBaseline } from '@mui/material';
 import CustomerRoute from './Routers/CustomerRoute';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from './state/Authentication/Action';
 
 function App() {
+
+  const dispatch = useDispatch();
+  const jwt = localStorage.getItem("jwt");
+  const {auth} = useSelector(store=>store);
+
+  useEffect(() => {
+    dispatch(getUser(auth.jwt || jwt))
+  },[auth.jwt, dispatch, jwt])
+
   return (
     <ThemeProvider theme={darkTheme}>
         <CssBaseline />
