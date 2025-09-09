@@ -79,7 +79,7 @@ export const addToFavourite = (jwt, restaurantId) => async (dispatch) => {
 
   try {
     const { data } = await api.put(
-      `${API_URL}/api/restaurants/${restaurantId}/add-favorite`,
+      `${API_URL}/api/restaurants/${restaurantId}/add-favorites`,
       {},
       {
         headers: { Authorization: `Bearer ${jwt}` },
@@ -95,7 +95,6 @@ export const addToFavourite = (jwt, restaurantId) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-  // dispatch({ type: LOGIN_REQUEST });
   try {
     localStorage.clear();
     dispatch({ type: LOGIN_SUCCESS});

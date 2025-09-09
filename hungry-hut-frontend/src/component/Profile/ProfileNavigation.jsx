@@ -12,32 +12,32 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../state/Authentication/Action";
 
 const menu = [
-  { title: "Orders", icon: <ShoppingBagIcon />},
-  { title: "Favourites", icon: <FavoriteIcon />},
-  { title: "Address", icon: <HomeIcon />},
-  { title: "Payments", icon: <AccountBalanceWalletIcon />},
-  { title: "Notifications", icon: <NotificationsIcon />},
-  { title: "Events", icon: <EventIcon />},
-  { title: "Logout", icon: <LogoutIcon />}
+  { title: "Orders", icon: <ShoppingBagIcon /> },
+  { title: "Favourites", icon: <FavoriteIcon /> },
+  { title: "Address", icon: <HomeIcon /> },
+  { title: "Payments", icon: <AccountBalanceWalletIcon /> },
+  { title: "Notifications", icon: <NotificationsIcon /> },
+  { title: "Events", icon: <EventIcon /> },
+  { title: "Logout", icon: <LogoutIcon /> },
 ];
 
 const ProfileNavigation = ({ open, handleClose }) => {
-
   const isSmallScreen = useMediaQuery("(max-width:900px)");
 
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
-  const handleNavigate=(item) =>{
-    if(item.title==="Logout"){
+  const handleNavigate = (item) => {
+    if (item.title === "Logout") {
       dispatch(logout());
       navigate("/");
       window.location.reload();
-    }
-    else
+    } else {
       navigate(`/my-profile/${item.title.toLowerCase()}`);
-  }
+    }
+    if (isSmallScreen) handleClose(); // close drawer on mobile
+  };
 
   return (
     <div>
@@ -46,17 +46,20 @@ const ProfileNavigation = ({ open, handleClose }) => {
         onClose={handleClose}
         anchor="left"
         open={isSmallScreen ? open : true}
-        sx={{zIndex:-1, position: 'sticky' }}
+        sx={{ zIndex: 12}}
       >
-        <div className="w-[50vw] lg:w-[20vw] h-[100vh] flex flex-col justify-center text-xl gap-8 pt-16">
+        <div className="w-fit lg:w-[20vw] h-[100vh] flex flex-col justify-center text-xl gap-8 pt-16">
           {menu.map((item, i) => (
-            <>
-              <div onClick={()=>handleNavigate(item)} className="px-5 flex items-center space-x-5 cursor-pointer">
+            <div key={item.title}>
+              <div
+                onClick={() => handleNavigate(item)}
+                className="lg:p-5 p-3 flex items-center space-x-5 cursor-pointer"
+              >
                 {item.icon}
                 <span>{item.title}</span>
               </div>
               {i !== menu.length - 1 && <Divider />}
-            </>
+            </div>
           ))}
         </div>
       </Drawer>

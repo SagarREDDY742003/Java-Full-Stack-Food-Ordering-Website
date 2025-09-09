@@ -1,21 +1,41 @@
-import { Button, Card } from '@mui/material'
-import React from 'react'
+import { Button, Card } from "@mui/material";
 
-const OrderCard = () => {
+
+const OrderCard = ({ order }) => {
   return (
-    <Card className='flex justify-between items-center p-5 sm:mx-4'>
-        <div className='flex items-center space-x-5'>
-            <img className='w-16 h-16' src="https://thvnext.bing.com/th/id/OIP.kjXliNp6y5Bjlmo4stafCAHaHa?w=129&h=104&c=7&bgcl=78f41a&r=0&o=6&dpr=2&pid=13.1&ucfimg=1" alt="food" />
+    <div className="mx-2 p-4 flex bg-slate-800 flex-col gap-2 items-center w-[20rem]">
+      {order.items.map((item) => (
+        <Card className="flex justify-between items-center p-4 sm:mx-4 w-full">
+          <div className="flex items-center space-x-5">
+            <img className="w-16 h-16" src={item.food.images[0]} alt="food" />
             <div>
-                <p>Pizza</p>
-                <p>$ 222</p>
+              <p>{item.food.name}</p>
+              <p>
+                <span className="text-gray-400">{"quantity: "}</span>
+                {item.quantity}
+              </p>
+              <p>
+                <span className="text-gray-400">{"price: ₹"}</span>
+                {item.totalPrice}
+              </p>
+              <div className="w-full flex flex-wrap gap-2">
+                {item.ingredients?.map((ingredient) => (
+                  <p className="text-xs p-1 bg-slate-800 rounded">{ingredient}</p>
+                ))}
+              </div>
             </div>
-        </div>
-        <div>
-            <Button className='cursor-not-allowed'>completed</Button>
-        </div>
-    </Card>
-  )
-}
+          </div>
+        </Card>
+      ))}
+      <div className="flex w-full items-baseline justify-evenly">
+        <p>
+          <span className="text-gray-400">{"Total price: ₹"}</span>
+          {order.totalPrice}
+        </p>
+        <Button className="cursor-not-allowed">{order.orderStatus}</Button>
+      </div>
+    </div>
+  );
+};
 
-export default OrderCard
+export default OrderCard;

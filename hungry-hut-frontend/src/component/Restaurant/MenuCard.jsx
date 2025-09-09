@@ -1,83 +1,105 @@
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import React from 'react'
-import { Button, Checkbox, FormControlLabel, FormGroup } from '@mui/material';
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Button, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { categorizeIngredients } from "../util/CategorizeIngredients";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import {addItemToCart} from '../../state/Cart/Action'
 
-const demo = [
-    {
-        category:"Nuts & Seeds",
-        ingredients:["Cashews","Walnuts","Pistachios","Chia Seeds","Sunflower Seeds"]
-    },
-    {
-        category:"Vegetables", 
-        ingredients:["Onion","Broccoli","Bell Peppers","Tomatoes"]
-    },
-    {
-        category:"Spices & Herbs",
-        ingredients:["Basil","Oregano","Thyme","Rosemary","Cilantro","Parsley","Cumin"]
-    },
-    {
-        category:"Proteins",
-        ingredients:["Chicken Breast","Tofu","Lentils","Chickpeas","Black Beans","Eggs","Greek Yogurt"]
-    },
-    {
-        category:"Sauces",
-        ingredients:["Tomato Sauce","Pesto","Soy Sauce","Hot Sauce"]
+const MenuCard = ({ item }) => {
+
+  const [selectedIngredients,setSelectedIngredients] = useState([]);
+  const dispatch = useDispatch();
+
+  const handleAddItemToCart=(e)=>{
+    e.preventDefault();
+    const reqData = {
+      token:localStorage.getItem("jwt"),
+      cartItem:{
+        foodId:item.id,
+        quantity:1,
+        ingredients: selectedIngredients
+      }
+    };
+    dispatch(addItemToCart(reqData));
+    console.log(reqData);
+  }
+
+  const handleCheckBoxChange=(itemName)=>{
+    if(selectedIngredients.includes(itemName)){
+      setSelectedIngredients(selectedIngredients.filter((item)=>item!==itemName))
     }
-]
-
-const MenuCard = () => {
-
-    const handleCheckBoxChange = (ingredient) => {
-        console.log(ingredient);
+    else{
+      setSelectedIngredients([...selectedIngredients,itemName])
     }
-    
+  }
+
   return (
     <div>
-        <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content" id="panel1-header">
-                <div className='lg:flex items-center justify-between'>
-                    <div className='lg:flex items-center lg:gap-5'>
-                        <img className='w-[7rem] h-[7rem] object-cover rounded-lg' src='https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg' alt='' />
-                    </div>
-                    <div className='space-y-1 lg:pl-4 lg:max-w-2xl'>
-                        <p className='font-semibold text-xl'>Pizza</p>
-                        <p>₹499</p>
-                        <p className='text-gray-400'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            malesuada lacus ex, sit amet blandit leo lobortis eget.</p>
-                    </div>
-                </div>
-            </AccordionSummary>
-            <AccordionDetails>
-                <form>
-                    <div className='flex gap-5 flex-wrap'>
-                        {
-                            demo.map((item) => 
-                                <div>
-                                    <p>{item.category}</p>
-                                    <FormGroup>
-                                        {item.ingredients.map((ingredient) =>
-                                            <FormControlLabel control={<Checkbox onChange={() => handleCheckBoxChange(ingredient)}/>} label={ingredient}/>
-                                        )}
-                                    </FormGroup>
-                                </div>
-                            )
-                        }
-                    </div>
-                    <div>
-                        <Button variant='contained' disabled={false} type='submit' className='pt-5'>
-                            {true?"Add to Cart":"Out of Stock"}
-                        </Button>
-                    </div>
-                    
-                </form>
-                
-            </AccordionDetails>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          <div className="lg:flex items-center justify-between">
+            <div className="lg:flex items-center lg:gap-5">
+              <img
+                className="w-[7rem] h-[7rem] object-cover rounded-lg"
+                src={item.images[0]}
+                alt=""
+              />
+            </div>
+            <div className="space-y-1 lg:pl-4 lg:max-w-2xl">
+              <p className="font-semibold text-xl">{item.name}</p>
+              <p>{item.price}</p>
+              <p className="text-gray-400">{item.description}</p>
+            </div>
+          </div>
+        </AccordionSummary>
+        <AccordionDetails>
+          <form onSubmit={handleAddItemToCart}>
+            <div className="flex gap-5 flex-wrap">
+              {Object.keys(categorizeIngredients(item.ingredients)).map(
+                (category) => (
+                  <div>
+                    <p>{category}</p>
+                    <FormGroup>
+                      {categorizeIngredients(item.ingredients)[category].map(
+                        (item) => (
+                          <FormControlLabel
+                            key={item.name}
+                            control={
+                              <Checkbox
+                                onChange={() => handleCheckBoxChange(item.name)}
+                              />
+                            }
+                            label={item.name}
+                          />
+                        )
+                      )}
+                    </FormGroup>
+                  </div>
+                )
+              )}
+            </div>
+            <div>
+              <Button
+                variant="contained"
+                disabled={false}
+                type="submit"
+                className="pt-5"
+              >
+                {true ? "Add to Cart" : "Out of Stock"}
+              </Button>
+            </div>
+          </form>
+        </AccordionDetails>
       </Accordion>
     </div>
-  )
-}
+  );
+};
 
-export default MenuCard
+export default MenuCard;

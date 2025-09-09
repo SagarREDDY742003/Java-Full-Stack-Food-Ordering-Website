@@ -10,7 +10,7 @@ import java.util.List;
 @Embeddable
 public class RestaurantDto {
 
-    private String title;
+    private String name;
 
     @Column(length = 1000)
     private List<String> images;
@@ -18,5 +18,7 @@ public class RestaurantDto {
     private String description;
 
     private Long id;
+
+    private boolean open;
 
 }
