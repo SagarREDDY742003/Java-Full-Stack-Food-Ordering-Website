@@ -21,8 +21,8 @@ const Home = () => {
 
         <section className='banner -z-50 relative flex flex-col justify-center items-center'>
             <div className='w-[50vw] z-10 text-center'>
-                <p className='text-2xl lg:text-6xl font-bold z-10 py-5'>Hungry Hut</p>
-                <p className='z-10 text-gray-200 text-xl lg:text-4xl'>Taste the Convenience: Food, Fast and Delivered.</p>
+                <p className='text-2xl lg:text-5xl font-bold z-10 py-5'>Hungry Hut</p>
+                <p className='z-10 text-gray-200 text-xl lg:text-3xl'>Taste the Convenience: Food, Fast and Delivered.</p>
             </div>
             <div className='cover absolute top-0 left-0 right-0'>
 
@@ -32,8 +32,8 @@ const Home = () => {
             </div>
         </section>
 
-        <section className='p-10 lg:py-10 lg:px-20'>
-            <p className='text-2xl font-semibold text-gray-300 py-3 pb-10'>Top Meels</p>
+        <section className='px-10 py-2 lg:py-2 lg:px-20'>
+            <p className='text-2xl font-semibold text-gray-300 py-3 pb-5 lg:pb-6'>Top Meels</p>
             <MultiItemCarousel />
         </section>
 

@@ -9,6 +9,7 @@ import Address from "./Address";
 import Payments from "./Payments";
 import Notifications from "./Notifications";
 import Events from "./Events";
+import MenuIcon from '@mui/icons-material/Menu';
 
 const Profile = () => {
   const [openSideBar, setOpenSideBar] = useState(false);
@@ -16,10 +17,10 @@ const Profile = () => {
   return (
     <div className="lg:flex justify-between w-full">
       <button
-        className="lg:hidden p-2 bg-blue-600 text-white m-4"
+        className="lg:hidden p-2 text-white m-3"
         onClick={() => setOpenSideBar(true)}
       >
-        Open Sidebar
+        <MenuIcon fontSize="large" />
       </button>
       <div className="sticky lg:h-[80vh] lg:w-[20%]">
         <ProfileNavigation

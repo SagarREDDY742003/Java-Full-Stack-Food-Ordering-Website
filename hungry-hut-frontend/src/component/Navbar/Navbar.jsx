@@ -22,9 +22,10 @@ const Navbar = () => {
     }
 
   return (
-    <div className='px-5 sticky z-50 top-0 py-[.8rem] bg-[#b80742] lg:px-20 flex justify-between'>
+    <div className='px-3 sticky z-50 top-0 py-2 bg-[#b80742] lg:px-10 flex justify-between'>
 
-        <div className='lg:mr-10 cursor-pointer flex items-center space-x-4' >
+        <div className='lg:mr-10 cursor-pointer flex items-center space-x-2' >
+            <img className='h-[3.4rem] w-[3.4rem] object-cover object-center rounded-full ' alt='' src='https://play-lh.googleusercontent.com/Aldjwx9IZEnqwEt1zYxhBySZE3_rTGMgKm-9fIUnrX12_eHw6Mg7EevhnP14BLfDjkI'/>
             <li className='logo font-semibold italic text-gray-100 text-2xl list-none' onClick={()=>navigate("/")}>Hungry Hut</li>
         </div>
 

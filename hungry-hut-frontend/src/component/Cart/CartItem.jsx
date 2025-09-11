@@ -3,6 +3,7 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { useDispatch, useSelector } from "react-redux";
 import {  removeCartItem, updateCartItem } from "../../state/Cart/Action";
+import { Toast } from "../util/Toast";
 
 const CartItem = ({ item }) => {
   const { auth } = useSelector((store) => store);
@@ -12,6 +13,7 @@ const CartItem = ({ item }) => {
   const handleUpdateCartItem = (value) => {
     if (value === -1 && item.quantity === 1) {
       handleRemoveCartItem();
+      Toast("Item removed successfully !","item-remove");
     }
     const data = { cartItemId: item.id, quantity: item.quantity + value };
     dispatch(updateCartItem({ data, jwt }));

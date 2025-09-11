@@ -3,8 +3,10 @@ package com.sagar.controller.order_controller;
 import com.sagar.model.Order;
 import com.sagar.model.User;
 import com.sagar.request.OrderRequest;
+import com.sagar.response.PaymentResponse;
 import com.sagar.service.UserService;
 import com.sagar.service.order_service.OrderService;
+import com.sagar.service.payment_service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,17 +22,21 @@ public class OrderController {
     private OrderService orderService;
 
     @Autowired
+    private PaymentService paymentService;
+
+    @Autowired
     private UserService userService;
 
     @PostMapping("/order")
-    public ResponseEntity<Order> createOrder(
+    public ResponseEntity<PaymentResponse> createOrder(
             @RequestBody OrderRequest req,
             @RequestHeader("Authorization") String jwt) throws Exception {
 
         User user = userService.findUserByJwtToken(jwt);
         Order order = orderService.createOrder(req,user);
+        PaymentResponse res = paymentService.createPaymentLink(order);
 
-        return new ResponseEntity<>(order, HttpStatus.CREATED);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
 
     }
 

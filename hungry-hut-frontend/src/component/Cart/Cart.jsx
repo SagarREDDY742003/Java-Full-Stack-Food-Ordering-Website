@@ -60,8 +60,6 @@ const Cart = () => {
       }
     }
     dispatch(createOrder(data));
-
-    console.log("formvalues", values);
     handleClose();
   };
 

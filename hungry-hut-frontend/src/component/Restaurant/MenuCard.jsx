@@ -6,35 +6,37 @@ import { Button, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { categorizeIngredients } from "../util/CategorizeIngredients";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {addItemToCart} from '../../state/Cart/Action'
+import { addItemToCart } from "../../state/Cart/Action";
+import "react-toastify/dist/ReactToastify.css";
+import { Toast } from "../util/Toast";
 
 const MenuCard = ({ item }) => {
-
-  const [selectedIngredients,setSelectedIngredients] = useState([]);
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
   const dispatch = useDispatch();
 
-  const handleAddItemToCart=(e)=>{
+  const handleAddItemToCart = (e) => {
     e.preventDefault();
     const reqData = {
-      token:localStorage.getItem("jwt"),
-      cartItem:{
-        foodId:item.id,
-        quantity:1,
-        ingredients: selectedIngredients
-      }
+      token: localStorage.getItem("jwt"),
+      cartItem: {
+        foodId: item.id,
+        quantity: 1,
+        ingredients: selectedIngredients,
+      },
     };
     dispatch(addItemToCart(reqData));
-    console.log(reqData);
-  }
+    Toast("Item added to cart!","add-item-to-cart");
+  };
 
-  const handleCheckBoxChange=(itemName)=>{
-    if(selectedIngredients.includes(itemName)){
-      setSelectedIngredients(selectedIngredients.filter((item)=>item!==itemName))
+  const handleCheckBoxChange = (itemName) => {
+    if (selectedIngredients.includes(itemName)) {
+      setSelectedIngredients(
+        selectedIngredients.filter((item) => item !== itemName)
+      );
+    } else {
+      setSelectedIngredients([...selectedIngredients, itemName]);
     }
-    else{
-      setSelectedIngredients([...selectedIngredients,itemName])
-    }
-  }
+  };
 
   return (
     <div>

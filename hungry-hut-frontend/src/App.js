@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from './state/Authentication/Action';
 import { findCart } from './state/Cart/Action';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
     <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <CustomerRoute />
+        <ToastContainer position="top-right" />
     </ThemeProvider>
   );
 }
