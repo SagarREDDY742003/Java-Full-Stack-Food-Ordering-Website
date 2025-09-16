@@ -2,12 +2,12 @@ import { ThemeProvider } from '@emotion/react';
 import './App.css';
 import { darkTheme } from './theme/DarkTheme';
 import { CssBaseline } from '@mui/material';
-import CustomerRoute from './Routers/CustomerRoute';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from './state/Authentication/Action';
 import { findCart } from './state/Cart/Action';
 import { ToastContainer } from 'react-toastify';
+import Routers from './Routers/Routers';
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <CustomerRoute />
+        <Routers />
         <ToastContainer position="top-right" />
     </ThemeProvider>
   );

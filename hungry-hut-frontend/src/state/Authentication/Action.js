@@ -13,6 +13,7 @@ import {
   LOGIN_FAILURE,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
+  LOGOUT,
   REGISTER_FAILURE,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
@@ -97,7 +98,7 @@ export const addToFavourite = (jwt, restaurantId) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   try {
     localStorage.clear();
-    dispatch({ type: LOGIN_SUCCESS});
+    dispatch({ type: LOGOUT});
     console.log("logout success");
   } catch (error) {
     console.log("error", error);
