@@ -8,10 +8,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Create, Delete } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const orders = [1, 1, 1, 1];
 
 const MenuTable = () => {
+
+  const navigate = useNavigate();
   return (
     <Box>
       <Card className="mt-1">
@@ -19,7 +22,7 @@ const MenuTable = () => {
           title={"All Menu Items"}
           sx={{ pt: 2, alignItems: "center" }}
           action={
-            <IconButton aria-label="settings">
+            <IconButton onClick={()=>navigate("/admin/restaurant/addMenu")} aria-label="settings">
               <Create />
             </IconButton>
           }
