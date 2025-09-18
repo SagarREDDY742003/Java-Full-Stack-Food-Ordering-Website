@@ -1,8 +1,15 @@
-import { CircularProgress, Grid, IconButton, TextField } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Grid,
+  IconButton,
+  TextField,
+} from "@mui/material";
 import { useFormik } from "formik";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
+import { uploadImageToCloudinary } from "../util/UploadToCloudinary";
 
 const initialValues = {
   name: "",
@@ -24,15 +31,51 @@ const initialValues = {
 };
 
 const CreateRestaurantForm = () => {
+
   const [uploadImage, setUploadImage] = useState(false);
 
   const formik = useFormik({
     initialValues,
-    onSubmit: () => {},
+    onSubmit: (values) => {
+      const data = {
+        name: values.name,
+        description: values.description,
+        cuisineType: values.cuisineType,
+        address: {
+          streetAddress: values.streetAddress,
+          city: values.city,
+          stateProvince: values.stateProvince,
+          postalCode: values.postalCode,
+          country: values.country,
+        },
+        contactInformation: {
+          email: values.email,
+          mobile: values.mobile,
+          instagram: values.instagram,
+          twitter: values.twitter,
+          facebook: values.facebook,
+          linkedin: values.linkedin,
+        },
+        openingHours: values.openingHours,
+        images: values.images,
+      };
+      console.log("data: ",data);
+    },
   });
 
-  const handleImageChange = (e) => {};
-  const handleRemoveImage = (index) => {};
+  const handleImageChange = async(e) => {
+    const file = e.target.files[0]
+    setUploadImage(true);
+    const image = await uploadImageToCloudinary(file);
+    formik.setFieldValue("images",[...formik.values.images,image])
+    setUploadImage(false)
+  };
+
+  const handleRemoveImage = (index) => {
+    const updatedImages = [...formik.values.images];
+    updatedImages.splice(index,1);
+    formik.setFieldValue("images",updatedImages)
+  };
 
   return (
     <div className="py-10 px-5 lg:flex items-center justify-center min-h-screen">
@@ -61,12 +104,12 @@ const CreateRestaurantForm = () => {
                 )}
               </label>
               <div className="flex flex-wrap gap-2">
-                {[1, 1, 1].map((item, index) => (
+                {formik.values.images.map((image, index) => (
                   <div className="relative">
                     <img
                       className="w-24 h-24 object-cover"
                       key={index}
-                      src="https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg"
+                      src={image}
                       alt=""
                     />
                     <IconButton
@@ -249,10 +292,10 @@ const CreateRestaurantForm = () => {
                 value={formik.values.linkedin}
               ></TextField>
             </Grid>
-            
-            
-            
           </Grid>
+          <Button variant="contained" type="submit" color="primary">
+            Create Restaurant
+          </Button>
         </form>
       </div>
     </div>
