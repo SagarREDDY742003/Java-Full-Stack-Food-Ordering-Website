@@ -13,21 +13,20 @@ import CreateIngredientsCategoryForm from "./CreateIngredientsCategoryForm";
 const orders = [1, 1, 1, 1];
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 340,
-  bgcolor: 'background.paper',
+  bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
 };
 
 const IngredientCategoryTable = () => {
-
   const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <Box>
@@ -36,7 +35,7 @@ const IngredientCategoryTable = () => {
           title={"Ingredient Category"}
           sx={{ pt: 2, alignItems: "center" }}
           action={
-            <IconButton aria-label="settings" onClick={handleOpen} >
+            <IconButton aria-label="settings" onClick={handleOpen}>
               <Create />
             </IconButton>
           }
@@ -64,11 +63,7 @@ const IngredientCategoryTable = () => {
         </TableContainer>
       </Card>
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        
-      >
+      <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <CreateIngredientsCategoryForm />
         </Box>
