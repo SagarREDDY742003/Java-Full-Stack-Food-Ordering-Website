@@ -2,16 +2,23 @@ import { Button, Card, CardContent, CardHeader, Grid } from "@mui/material";
 import React from "react";
 import InstagramIcon from '@mui/icons-material/Instagram';
 import XIcon from '@mui/icons-material/X';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { useDispatch, useSelector } from "react-redux";
+import { updateRestaurantStatus } from "../../state/Restaurant/Action";
 
 const Details = () => {
-  const handleRestaurantStatus = () => {};
+    const usersRestaurant = useSelector((store) => store.restaurant.usersRestaurant);
+    const dispatch = useDispatch();
+
+    console.log(usersRestaurant);
+
+  const handleRestaurantStatus = () => {
+    dispatch(updateRestaurantStatus({restaurantId:usersRestaurant.id , jwt:localStorage.getItem("jwt")}));
+  };
   return (
     <div className="lg:px-20 px-5 pb-10">
       <div className="py-5 flex justify-center items-center gap-5">
         <h1 className="text-2xl lg:text-6xl text-center font-bold p-5">
-          Indian Fast Food
+          {usersRestaurant.name}
         </h1>
         <div>
           <Button
@@ -19,9 +26,9 @@ const Details = () => {
             size="large"
             variant="contained"
             className="py-[1rem] px-[2rem]"
-            color={true ? "primary" : "error"}
+            color={usersRestaurant?.open ? "primary" : "success"}
           >
-            {true ? "close" : "open"}
+            {usersRestaurant?.open ? "close" : "open"}
           </Button>
         </div>
       </div>
@@ -38,35 +45,35 @@ const Details = () => {
                   <p className="w-48">Owner</p>
                   <p>
                     <span className="pr-5">-</span>
-                    sagar
+                    {usersRestaurant.owner.fullName}
                   </p>
                 </div>
                 <div className="flex">
                   <p className="w-48">Restaurant Name</p>
                   <p>
                     <span className="pr-5">-</span>
-                    sagar
+                    {usersRestaurant.name}
                   </p>
                 </div>
                 <div className="flex">
                   <p className="w-48">Cuisine Type</p>
                   <p>
                     <span className="pr-5">-</span>
-                    sagar
+                    {usersRestaurant.cuisineType}
                   </p>
                 </div>
                 <div className="flex">
                   <p className="w-48">Opening Hours</p>
                   <p>
                     <span className="pr-5">-</span>
-                    sagar
+                    {usersRestaurant.openingHours}
                   </p>
                 </div>
                 <div className="flex">
                   <p className="w-48">Status</p>
                   <p>
                     <span className="pr-5">-</span>
-                    {true ? (
+                    {usersRestaurant?.open? (
                       <span className="px-5 py-2 rounded-full bg-green-400 text-gray-950">
                         Open
                       </span>
@@ -92,28 +99,28 @@ const Details = () => {
                   <p className="w-48">Country</p>
                   <p>
                     <span className="pr-5">-</span>
-                    India
+                    {usersRestaurant.address?.country}
                   </p>
                 </div>
                 <div className="flex">
                   <p className="w-48">City</p>
                   <p>
                     <span className="pr-5">-</span>
-                    Tirupati
+                    {usersRestaurant.address?.city}
                   </p>
                 </div>
                 <div className="flex">
                   <p className="w-48">Postal Code</p>
                   <p>
                     <span className="pr-5">-</span>
-                    513004
+                    {usersRestaurant.address?.postalCode}
                   </p>
                 </div>
                 <div className="flex">
                   <p className="w-48">Street Address</p>
                   <p>
                     <span className="pr-5">-</span>
-                    sagar
+                    {usersRestaurant.address?.streetAddress}
                   </p>
                 </div>
               </div>
@@ -131,24 +138,22 @@ const Details = () => {
                   <p className="w-48">Email</p>
                   <p>
                     <span className="pr-5">-</span>
-                    India
+                    {usersRestaurant.contactInformation.email}
                   </p>
                 </div>
                 <div className="flex">
                   <p className="w-48">Mobile</p>
                   <p>
                     <span className="pr-5">-</span>
-                    Tirupati
+                    {usersRestaurant.contactInformation.mobile}
                   </p>
                 </div>
                 <div className="flex">
                   <p className="w-48">Social</p>
                   <div className="flex text-gray-400 items-center pb-3 gap-2">
                     <span className="pr-5">-</span>
-                    <a href="/"><InstagramIcon sx={{fontSize:"3rem"}}/></a>
-                    <a href="/"><XIcon sx={{fontSize:"3rem"}}/></a>
-                    <a href="/"><LinkedInIcon sx={{fontSize:"3rem"}}/></a>
-                    <a href="/"><FacebookIcon sx={{fontSize:"3rem"}}/></a>
+                    <a href={usersRestaurant.contactInformation.instagram}><InstagramIcon sx={{fontSize:"3rem"}}/></a>
+                    <a href={usersRestaurant.contactInformation.twitter}><XIcon sx={{fontSize:"3rem"}}/></a>
                   </div>
                 </div>
               </div>

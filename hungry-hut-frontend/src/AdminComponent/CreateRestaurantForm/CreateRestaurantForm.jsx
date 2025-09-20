@@ -10,6 +10,8 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { uploadImageToCloudinary } from "../util/UploadToCloudinary";
+import { useDispatch } from "react-redux";
+import { createRestaurant } from "../../state/Restaurant/Action";
 
 const initialValues = {
   name: "",
@@ -17,15 +19,13 @@ const initialValues = {
   cuisineType: "",
   streetAddress: "",
   city: "",
-  stateProvince: "",
+  state: "",
   postalCode: "",
   country: "",
   email: "",
   mobile: "",
   instagram: "",
   twitter: "",
-  facebook: "",
-  linkedin: "",
   openingHours: "Mon-Sun : 9:00 AM - 12:00 PM",
   images: [],
 };
@@ -33,6 +33,8 @@ const initialValues = {
 const CreateRestaurantForm = () => {
 
   const [uploadImage, setUploadImage] = useState(false);
+  const dispatch = useDispatch();
+  const jwt = localStorage.getItem("jwt");
 
   const formik = useFormik({
     initialValues,
@@ -44,7 +46,7 @@ const CreateRestaurantForm = () => {
         address: {
           streetAddress: values.streetAddress,
           city: values.city,
-          stateProvince: values.stateProvince,
+          state: values.state,
           postalCode: values.postalCode,
           country: values.country,
         },
@@ -52,14 +54,13 @@ const CreateRestaurantForm = () => {
           email: values.email,
           mobile: values.mobile,
           instagram: values.instagram,
-          twitter: values.twitter,
-          facebook: values.facebook,
-          linkedin: values.linkedin,
+          twitter: values.twitter
         },
         openingHours: values.openingHours,
         images: values.images,
       };
       console.log("data: ",data);
+      dispatch(createRestaurant({data:data,token:jwt}));
     },
   });
 
@@ -196,12 +197,12 @@ const CreateRestaurantForm = () => {
             <Grid item xs={6}>
               <TextField
                 fullWidth
-                id="stateProvince"
-                name="stateProvince"
-                label="State Province"
+                id="state"
+                name="state"
+                label="State"
                 variant="outlined"
                 onChange={formik.handleChange}
-                value={formik.values.stateProvince}
+                value={formik.values.state}
               ></TextField>
             </Grid>
             <Grid item xs={6}>
@@ -268,28 +269,6 @@ const CreateRestaurantForm = () => {
                 variant="outlined"
                 onChange={formik.handleChange}
                 value={formik.values.twitter}
-              ></TextField>
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                fullWidth
-                id="facebook"
-                name="facebook"
-                label="Facebook"
-                variant="outlined"
-                onChange={formik.handleChange}
-                value={formik.values.facebook}
-              ></TextField>
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                fullWidth
-                id="linkedin"
-                name="linkedin"
-                label="Linkedin"
-                variant="outlined"
-                onChange={formik.handleChange}
-                value={formik.values.linkedin}
               ></TextField>
             </Grid>
           </Grid>

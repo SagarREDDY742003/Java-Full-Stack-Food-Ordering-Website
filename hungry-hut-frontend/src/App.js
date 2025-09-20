@@ -8,6 +8,7 @@ import { getUser } from './state/Authentication/Action';
 import { findCart } from './state/Cart/Action';
 import { ToastContainer } from 'react-toastify';
 import Routers from './Routers/Routers';
+import { getRestaurantByUserId } from './state/Restaurant/Action';
 
 function App() {
 
@@ -19,6 +20,10 @@ function App() {
     dispatch(getUser(auth.jwt || jwt));
     dispatch(findCart(jwt));
   },[auth.jwt, dispatch, jwt])
+
+  useEffect(()=>{
+    dispatch(getRestaurantByUserId(auth.jwt||jwt));
+  },[auth.user])
 
   return (
     <ThemeProvider theme={darkTheme}>

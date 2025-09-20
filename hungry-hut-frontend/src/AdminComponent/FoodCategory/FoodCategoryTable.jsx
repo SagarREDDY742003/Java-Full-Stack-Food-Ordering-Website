@@ -7,18 +7,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Create } from "@mui/icons-material";
+import { Close, Create } from "@mui/icons-material";
 import CreateFoodCategoryForm from "./CreateFoodCategoryForm";
-
-const orders = [1, 1, 1, 1];
+import { useSelector } from "react-redux";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 340,
-  bgcolor: 'background.paper',
+  bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
 };
@@ -27,6 +26,9 @@ const FoodCategoryTable = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const categories = useSelector((store) => store.restaurant.categories);
+  console.log(categories);
 
   return (
     <Box>
@@ -49,13 +51,13 @@ const FoodCategoryTable = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders.map(() => (
+              {categories.map((item,index) => (
                 <TableRow
-                  // key={row.name}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  key={index}
                 >
-                  <TableCell align="left">{1}</TableCell>
-                  <TableCell align="left">{"pizza"}</TableCell>
+                  <TableCell align="left">{item.id}</TableCell>
+                  <TableCell align="left">{item.name}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -63,12 +65,13 @@ const FoodCategoryTable = () => {
         </TableContainer>
       </Card>
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        
-      >
+      <Modal open={open}>
         <Box sx={style}>
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <IconButton onClick={handleClose}>
+              <Close />
+            </IconButton>
+          </Box>
           <CreateFoodCategoryForm />
         </Box>
       </Modal>

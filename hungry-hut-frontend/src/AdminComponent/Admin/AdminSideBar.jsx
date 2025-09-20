@@ -22,41 +22,51 @@ const menu = [
   { title: "Logout", icon: <LogoutIcon />, path: "/" },
 ];
 
-const AdminSideBar = ({ handleClose }) => {
+const AdminSideBar = ({ handleClose, open }) => {
+  const isSmallScreen = useMediaQuery("(max-width:1080px)");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    const isSmallScreen = useMediaQuery("(max-width:1080px)");
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-
-    const handleNavigate=(item)=>{
-        navigate(`/admin/restaurant${item.path}`);
-        if(item.title==="Logout"){
-            navigate("/");
-            dispatch(logout());
-            handleClose();
-        }
+  const handleNavigate = (item) => {
+    navigate(`/admin/restaurant${item.path}`);
+    if (item.title === "Logout") {
+      navigate("/");
+      dispatch(logout());
+      handleClose();
     }
+    handleClose();
+  };
   return (
     <div>
       <>
         <Drawer
-        variant={isSmallScreen?"temporary":"permanent"}
-          sx={{ zIndex: 1 }}
+          variant={isSmallScreen ? "temporary" : "permanent"}
+          sx={{
+            // zIndex: 1,
+            height: "calc(100% - 64px)",
+            "& .MuiDrawer-paper": {
+              top: "70.5px",
+              height: "calc(100% - 70.5px)",
+            },
+          }}
           anchor="left"
-          open={true}
+          open={open}
           onClose={handleClose}
         >
-            <div className="w-[70vw] lg:w-[20vw] h-screen flex flex-col justify-center text-xl space-y-[1.65rem]">
-                {
-                    menu.map((item,i) => <>
-                        <div className="px-5 flex items-center gap-5 cursor-pointer" onClick={()=>handleNavigate(item)}>
-                            {item.icon}
-                            <span>{item.title}</span>
-                        </div>
-                        {i!==menu.length-1 && <Divider/>}
-                    </>)
-                }
-            </div>
+          <div className=" w-auto h-screen flex flex-col justify-center text-xl lg:space-y-[1.4rem] space-y-[1rem] ">
+            {menu.map((item, i) => (
+              <>
+                <div
+                  className="px-5 flex items-center gap-5 cursor-pointer"
+                  onClick={() => handleNavigate(item)}
+                >
+                  {item.icon}
+                  <span>{item.title}</span>
+                </div>
+                {i !== menu.length - 1 && <Divider />}
+              </>
+            ))}
+          </div>
         </Drawer>
       </>
     </div>

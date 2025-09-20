@@ -162,7 +162,7 @@ export const deleteRestaurant = ({ restaurantId, jwt }) => {
   };
 };
 
-export const updateRestaurantStstus = ({ restaurantId, jwt }) => {
+export const updateRestaurantStatus = ({ restaurantId, jwt }) => {
   return async (dispatch) => {
     dispatch({ type: UPDATE_RESTAURANT_STATUS_REQUEST });
     try {
