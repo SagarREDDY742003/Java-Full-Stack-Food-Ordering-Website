@@ -3,7 +3,7 @@ import * as actionType from './ActionType';
 const initialState = {
     menuItems:[],
     loading:false,
-    erroe:null,
+    error:null,
     search:[],
     message:null
 };

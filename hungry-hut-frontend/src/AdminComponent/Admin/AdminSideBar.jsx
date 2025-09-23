@@ -59,6 +59,7 @@ const AdminSideBar = ({ handleClose, open }) => {
                 <div
                   className="px-5 flex items-center gap-5 cursor-pointer"
                   onClick={() => handleNavigate(item)}
+                  key={item.title}
                 >
                   {item.icon}
                   <span>{item.title}</span>

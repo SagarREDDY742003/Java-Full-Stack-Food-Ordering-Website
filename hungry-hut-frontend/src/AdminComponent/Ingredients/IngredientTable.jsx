@@ -1,4 +1,4 @@
-import { Box, Card, CardHeader, IconButton, Modal } from "@mui/material";
+import { Box, Button, Card, CardHeader, IconButton, Modal } from "@mui/material";
 import React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,8 +9,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Create } from "@mui/icons-material";
 import CreateIngredientForm from "./CreateIngredientForm";
-
-const orders = [1, 1, 1, 1];
+import { useDispatch, useSelector } from "react-redux";
+import { updateStockOfIngredient } from "../../state/Ingredients/Action";
 
 const style = {
   position: "absolute",
@@ -27,6 +27,13 @@ const IngredientTable = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const dispatch = useDispatch();
+  const ingredients =useSelector(store=>store.ingredients.ingredients);
+
+  const handleStock=(id)=>{
+    console.log(id);
+    dispatch(updateStockOfIngredient({id,jwt:localStorage.getItem("jwt")}));
+  }
 
   return (
     <Box>
@@ -51,15 +58,15 @@ const IngredientTable = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders.map(() => (
+              {ingredients?.map((item) => (
                 <TableRow
-                  // key={row.name}
+                  key={item.name}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell align="right">{1}</TableCell>
-                  <TableCell align="right">{"Chilli Sauce"}</TableCell>
-                  <TableCell align="right">{"Sauce"}</TableCell>
-                  <TableCell align="right">{"IN STOCK"}</TableCell>
+                  <TableCell align="right">{item.id}</TableCell>
+                  <TableCell align="right">{item.name}</TableCell>
+                  <TableCell align="right">{item.category.name}</TableCell>
+                  <TableCell align="right"><Button onClick={()=>handleStock(item.id)} variant="outlined" color={item.inStock?"success":"warning"} >{item.inStock?"IN STOCK":"OUT OF STOCK"}</Button></TableCell>
                 </TableRow>
               ))}
             </TableBody>

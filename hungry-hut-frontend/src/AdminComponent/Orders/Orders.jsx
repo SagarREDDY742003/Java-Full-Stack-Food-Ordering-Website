@@ -12,6 +12,8 @@ import OrderTable from "./OrderTable";
 const orderStatus = [
   { label: "Pending", value: "PENDING" },
   { label: "Completed", value: "COMPLETED" },
+  { label: "Out For Delivery", value: "OUT_FOR_DELIVERY" },
+  { label: "Delivered", value: "DELIVERED" },
   { label: "All", value: "ALL" },
 ];
 const Orders = () => {
@@ -45,7 +47,7 @@ const Orders = () => {
           </RadioGroup>
         </FormControl>
       </Card>
-      <OrderTable/>
+      <OrderTable filter={filterValue} />
     </div>
   );
 };

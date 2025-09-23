@@ -14,7 +14,7 @@ function App() {
 
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
-  const {auth} = useSelector(store=>store);
+  const auth = useSelector(store=>store.auth);
 
   useEffect(() => {
     dispatch(getUser(auth.jwt || jwt));
@@ -23,7 +23,7 @@ function App() {
 
   useEffect(()=>{
     dispatch(getRestaurantByUserId(auth.jwt||jwt));
-  },[auth.user])
+  },[auth.jwt,dispatch,jwt])
 
   return (
     <ThemeProvider theme={darkTheme}>

@@ -299,13 +299,13 @@ export const getRestaurantsCategory = ({ jwt, restaurantId }) => {
           },
         }
       );
-      console.log("get restaurant events", response.data);
+      console.log("get restaurant categories", response.data);
       dispatch({
         type: GET_RESTAURANTS_CATEGORY_SUCCESS,
         payload: response.data,
       });
     } catch (error) {
-      console.log("get restaurant events", error);
+      console.log("get restaurant categories", error);
       dispatch({ type: GET_RESTAURANTS_CATEGORY_FAILURE, payload: error });
     }
   };

@@ -1,19 +1,31 @@
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createIngredient } from "../../state/Ingredients/Action";
 
 const CreateIngredientForm = () => {
+
+  const dispatch=useDispatch();
+
+    const ingredientCategories =useSelector(store=>store.ingredients.categories);
+    const restaurant = useSelector(store=>store.restaurant.usersRestaurant)
     
   const [FormData, setFormData] = useState({
     name: "",
-    ingredientCategoryId: ""
+    categoryId: "",
+    restaurantId:""
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const data = {
       name: FormData.name,
-      ingredientCategoryId:FormData.ingredientCategoryId
+      categoryId:FormData.categoryId,
+      restaurantId:restaurant.id
     };
     console.log(data);
+    dispatch(createIngredient({data:data,jwt:localStorage.getItem("jwt")}));
+    
   };
 
   const handleInputChange = (e) => {
@@ -43,14 +55,17 @@ const CreateIngredientForm = () => {
                 <InputLabel>Category</InputLabel>
                 <Select
                   id="seasonal"
-                  name="ingredientCategoryId"
+                  name="categoryId"
                   label="Is Seasonal"
-                  value={FormData.ingredientCategoryId}
+                  value={FormData.categoryId}
                   onChange={handleInputChange}
                   
                 >
-                  <MenuItem value={10}>Yes</MenuItem>
-                  <MenuItem value={20}>No</MenuItem>
+                  {
+                    ingredientCategories.map((category)=>
+                      <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
+                    )
+                  }
                 </Select>
               </FormControl>
           <Button type="submit" variant="contained" fullWidth>

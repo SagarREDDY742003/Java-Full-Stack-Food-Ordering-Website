@@ -3,7 +3,7 @@ import { CREATE_INGREDIENT_CATEGORY_SUCCESS, CREATE_INGREDIENT_SUCCESS, GET_INGR
 const initialState = {
     ingredients:[],
     update:null,
-    category:null
+    categories:null
 };
 
 export const ingredientReducer = (state=initialState,action) => {
@@ -18,13 +18,13 @@ export const ingredientReducer = (state=initialState,action) => {
         case GET_INGREDIENT_CATEGORY_SUCCESS:
             return {
                 ...state,
-                category: action.payload
+                categories: action.payload
             };
         
         case CREATE_INGREDIENT_CATEGORY_SUCCESS:
             return{
                 ...state,
-                category:[...state.category,action.payload]
+                categories:[...state.categories,action.payload]
             };
 
         case CREATE_INGREDIENT_SUCCESS:

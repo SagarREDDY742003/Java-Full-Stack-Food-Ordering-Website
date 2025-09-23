@@ -29,7 +29,7 @@ public class FoodServiceImp implements FoodService {
         food.setName(request.getName());
         food.setImages(request.getImages());
         food.setPrice(request.getPrice());
-        food.setIngredients(request.getIngredientsItems());
+        food.setIngredients(request.getIngredients());
         food.setSeasonable(request.isSeasonal());
         food.setVegetarian(request.isVegetarian());
         food.setCreationDate(new Date());

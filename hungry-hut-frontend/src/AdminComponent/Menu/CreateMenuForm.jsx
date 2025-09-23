@@ -1,6 +1,8 @@
 import {
+  Box,
   Button,
   Checkbox,
+  Chip,
   CircularProgress,
   FormControl,
   Grid,
@@ -17,6 +19,9 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { uploadImageToCloudinary } from "../util/UploadToCloudinary";
+import { useDispatch, useSelector } from "react-redux";
+import { createMenuItem } from "../../state/Menu/Action";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   name: "",
@@ -32,12 +37,18 @@ const initialValues = {
 
 const CreateMenuForm = () => {
   const [uploadImage, setUploadImage] = useState(false);
+  const dispatch = useDispatch();
+  const ingredients = useSelector((store) => store.ingredients.ingredients);
+  const categories = useSelector((store) => store.restaurant.categories);
+  const restaurant = useSelector((store) => store.restaurant.usersRestaurant);
+  const navigate=useNavigate();
 
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      values.restaurantId = 1;
-      console.log("data: ", values);
+      values.restaurantId = restaurant.id;
+      dispatch(createMenuItem({menu:values,jwt:localStorage.getItem("jwt")}));
+      navigate("/admin/restaurant/menu");
     },
   });
 
@@ -58,9 +69,7 @@ const CreateMenuForm = () => {
   return (
     <div className="py-10 px-5 lg:flex items-center justify-center min-h-screen">
       <div className="lg:max-w-4xl">
-        <h1 className="font-bold text-2xl text-center py-2">
-          Add New Menu
-        </h1>
+        <h1 className="font-bold text-2xl text-center py-2">Add New Menu</h1>
         <form onSubmit={formik.handleSubmit} className="space-y-4">
           <Grid container spacing={2}>
             <Grid item xs={12} className="flex flex-wrap gap-5">
@@ -147,11 +156,10 @@ const CreateMenuForm = () => {
                   label="Category"
                   value={formik.values.category}
                   onChange={formik.handleChange}
-                  
                 >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  {categories?.map((category) => (
+                    <MenuItem key={category.name} value={category}>{category.name}</MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
@@ -168,14 +176,20 @@ const CreateMenuForm = () => {
                   value={formik.values.ingredients}
                   onChange={formik.handleChange}
                   input={<OutlinedInput label="ingredients" />}
-                  renderValue={(selected) => selected.join(", ")}
+                  renderValue={(selected) => (
+                    <Box sx={{display:"flex",flexWrap:"wrap",gap:0.5}}>
+                      {selected.map((value)=>(<Chip key={value.id} label={value.name}/>))}
+                    </Box>
+                  )}
                 >
-                  {["bread", "jam", "sauce"].map((name, index) => (
-                    <MenuItem key={name} value={name}>
+                  {ingredients?.map((ingredient) => (
+                    <MenuItem key={ingredient.name} value={ingredient}>
                       <Checkbox
-                        checked={formik.values.ingredients.includes(name)}
+                        checked={formik.values.ingredients.includes(
+                          ingredient
+                        )}
                       />
-                      <ListItemText primary={name} />
+                      <ListItemText primary={ingredient.name} />
                     </MenuItem>
                   ))}
                 </Select>
@@ -190,7 +204,6 @@ const CreateMenuForm = () => {
                   label="Is Vegetarian"
                   value={formik.values.vegetarian}
                   onChange={formik.handleChange}
-                  
                 >
                   <MenuItem value={true}>Yes</MenuItem>
                   <MenuItem value={false}>No</MenuItem>
@@ -206,7 +219,6 @@ const CreateMenuForm = () => {
                   label="Is Seasonal"
                   value={formik.values.seasonal}
                   onChange={formik.handleChange}
-                  
                 >
                   <MenuItem value={true}>Yes</MenuItem>
                   <MenuItem value={false}>No</MenuItem>

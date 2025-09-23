@@ -18,7 +18,7 @@ import {
   getRestaurantById,
   getRestaurantsCategory,
 } from "../../state/Restaurant/Action";
-import { getMenuItemsByRestaurantId } from "../../state/Menu/Action";
+import { getMenuItemsByRestaurantIdUser } from "../../state/Menu/Action";
 
 const foodTypes = [
   { value: "all", label: "All" },
@@ -42,7 +42,7 @@ const RestaurantDetails = () => {
 
   useEffect(() => {
     dispatch(
-      getMenuItemsByRestaurantId({
+      getMenuItemsByRestaurantIdUser({
         jwt,
         restaurantId: id,
         vegetarian: selectedType==="veg",
