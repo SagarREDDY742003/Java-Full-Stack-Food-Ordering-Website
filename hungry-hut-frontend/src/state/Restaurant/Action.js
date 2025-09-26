@@ -209,6 +209,7 @@ export const createEvent = ({ data, jwt, restaurantId }) => {
   };
 };
 
+
 export const getAllEvents = ({ jwt }) => {
   return async (dispatch) => {
     dispatch({ type: GET_ALL_EVENTS_REQUEST });
@@ -237,7 +238,7 @@ export const deleteEvent = ({ eventId, jwt }) => {
         },
       });
       console.log("delete event", response.data);
-      dispatch({ type: DELETE_EVENTS_SUCCESS, payload: response.data });
+      dispatch({ type: DELETE_EVENTS_SUCCESS, payload: eventId });
     } catch (error) {
       console.log("delete event", error);
       dispatch({ type: DELETE_EVENTS_FAILURE, payload: error });

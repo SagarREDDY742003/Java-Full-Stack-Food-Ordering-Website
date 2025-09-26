@@ -104,7 +104,7 @@ const OrderTable = ({filter}) => {
                     <TableCell align="center">
                       {order.customer.fullName}
                     </TableCell>
-                    <TableCell align="center">{order.totalPrice}</TableCell>
+                    <TableCell align="center">{"₹"+order.totalPrice}</TableCell>
                     <TableCell align="center">
                       <div className="flex flex-wrap gap-1 justify-center">
                         {order.items?.map((item) => (

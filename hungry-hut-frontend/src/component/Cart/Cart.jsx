@@ -1,6 +1,6 @@
 import { Divider, Card, Button, Modal, Grid, TextField } from "@mui/material";
 import CartItem from "./CartItem";
-import AddressCard from "./AddressCard";
+// import AddressCard from "./AddressCard";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import Box from "@mui/material/Box";
 import { Field, Form, Formik } from "formik";
@@ -36,6 +36,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const Cart = () => {
+  
   const [open, setOpen] = useState(false);
   const { cart,auth } = useSelector(store => store);
   const dispatch = useDispatch();
@@ -63,17 +64,17 @@ const Cart = () => {
     handleClose();
   };
 
-  const createOrderUsingSelectedAddress = () => {
-    console.log("create order called");
-  };
+  // const createOrderUsingSelectedAddress = () => {
+  //   console.log("create order called");
+  // };
 
   return (
     <>
       <main className="lg:flex justify-between">
         <section className="lg:w-[30%] space-y-6 lg:min-h-screen pt-10">
-          {cart.cartItems.map((item) => (
+          { cart.cartItems.length>0 ? cart.cartItems.map((item) => (
             <CartItem item={item} />
-          ))}
+          )):<p className="text-center">No items in cart</p>}
           <Divider />
           <div className="billdetails px-5 text-sm">
             <p className="font-extralight py-5">Bill Details</p>
@@ -84,17 +85,17 @@ const Cart = () => {
               </div>
               <div className="flex justify-between text-gray-400">
                 <p>Delivery Fee</p>
-                <p>49</p>
+                <p>39</p>
               </div>
               <div className="flex justify-between text-gray-400">
                 <p>GST and Restaurant Charges</p>
-                <p>59</p>
+                <p>19</p>
               </div>
               <Divider />
             </div>
             <div className="flex justify-between text-gray-400">
               <p>Total Pay</p>
-              <p>{cart.cart?.total+49+59}</p>
+              <p>{cart.cart?.total+39+19}</p>
             </div>
           </div>
         </section>
@@ -107,13 +108,13 @@ const Cart = () => {
               Choose Delivery Address
             </h1>
             <div className="flex gap-5 flex-wrap justify-center">
-              {[1, 1, 1, 1].map((item) => (
+              {/* {[1, 1, 1, 1].map((item) => (
                 <AddressCard
                   handleSelectAddress={createOrderUsingSelectedAddress}
                   item={item}
                   showButton={true}
                 />
-              ))}
+              ))} */}
 
               <Card className="flex gap-5 w-64 p-5">
                 <AddLocationAltIcon />
@@ -216,7 +217,7 @@ const Cart = () => {
                     color="primary"
                     fullWidth
                   >
-                    Save Address
+                    Place Order
                   </Button>
                 </Grid>
               </Grid>

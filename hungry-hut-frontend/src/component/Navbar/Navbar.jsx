@@ -15,7 +15,7 @@ const Navbar = () => {
     if (auth.user?.role === "ROLE_CUSTOMER") {
       navigate("/my-profile");
     } else {
-      navigate("/admin/restaurant");
+      navigate("/admin/restaurant/details");
     }
   };
 
@@ -37,9 +37,11 @@ const Navbar = () => {
 
       <div className="flex items-center space-x-2 lg:space-x-10">
         <div className="">
-          <IconButton>
-            <SearchIcon sx={{ fontSize: "1.5rem" }} />
-          </IconButton>
+          {auth.user && auth.user.role === "ROLE_CUSTOMER" && (
+            <IconButton>
+              <SearchIcon sx={{ fontSize: "1.5rem" }} />
+            </IconButton>
+          )}
         </div>
 
         <div className="">
@@ -58,11 +60,13 @@ const Navbar = () => {
         </div>
 
         <div>
-          <IconButton onClick={() => navigate("/cart")}>
-            <Badge color="secondary" badgeContent={cart.cartItems.length}>
-              <ShoppingCartIcon sx={{ fontSize: "1.5rem" }} />
-            </Badge>
-          </IconButton>
+          {auth.user && auth.user.role === "ROLE_CUSTOMER" && (
+            <IconButton onClick={() => navigate("/cart")}>
+              <Badge color="secondary" badgeContent={cart.cartItems.length}>
+                <ShoppingCartIcon sx={{ fontSize: "1.5rem" }} />
+              </Badge>
+            </IconButton>
+          )}
         </div>
       </div>
     </div>

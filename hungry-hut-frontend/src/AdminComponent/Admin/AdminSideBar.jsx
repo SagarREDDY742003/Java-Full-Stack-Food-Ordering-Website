@@ -5,20 +5,18 @@ import FastfoodIcon from "@mui/icons-material/Fastfood";
 import CategoryIcon from "@mui/icons-material/Category";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
-import DashboardIcon from "@mui/icons-material/Dashboard";
 import { Divider, Drawer, useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../state/Authentication/Action";
 
 const menu = [
-  { title: "Dashboard", icon: <DashboardIcon />, path: "/" },
+  { title: "Details", icon: <ManageAccountsIcon />, path: "/details" },
   { title: "Orders", icon: <ShoppingBagIcon />, path: "/orders" },
   { title: "Menu", icon: <RestaurantMenuIcon />, path: "/menu" },
   { title: "Food Category", icon: <CategoryIcon />, path: "/category" },
   { title: "Ingredients", icon: <FastfoodIcon />, path: "/ingredients" },
   { title: "Events", icon: <EventIcon />, path: "/events" },
-  { title: "Details", icon: <ManageAccountsIcon />, path: "/details" },
   { title: "Logout", icon: <LogoutIcon />, path: "/" },
 ];
 
@@ -53,7 +51,7 @@ const AdminSideBar = ({ handleClose, open }) => {
           open={open}
           onClose={handleClose}
         >
-          <div className=" w-auto h-screen flex flex-col justify-center text-xl lg:space-y-[1.4rem] space-y-[1rem] ">
+          <div className=" w-auto h-screen flex flex-col justify-center text-xl lg:space-y-[1.6rem] space-y-[1rem] ">
             {menu.map((item, i) => (
               <>
                 <div

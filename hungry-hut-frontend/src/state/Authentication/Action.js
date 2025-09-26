@@ -30,7 +30,7 @@ export const registerUser = (reqData) => async (dispatch) => {
     );
     if (data.jwt) localStorage.setItem("jwt", data.jwt);
     if (data.role === "ROLE_RESTAURANT_OWNER")
-      reqData.navigate("/admin/restaurant");
+      reqData.navigate("/admin/restaurant/details");
     else reqData.navigate("/");
     dispatch({ type: REGISTER_SUCCESS, payload: data.jwt });
     console.log("register success", data);
@@ -50,7 +50,7 @@ export const loginUser = (reqData) => async (dispatch) => {
     )
     if (data.jwt) localStorage.setItem("jwt", data.jwt)
     if (data.role === "ROLE_RESTAURANT_OWNER")
-      reqData.navigate("/admin/restaurant")
+      reqData.navigate("/admin/restaurant/details");
     else reqData.navigate("/");
     dispatch({ type: LOGIN_SUCCESS, payload: data.jwt })
     console.log("login success", data);

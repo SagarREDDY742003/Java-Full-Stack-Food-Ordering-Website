@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AdminSideBar from "./AdminSideBar";
-import { Route, Routes } from "react-router-dom";
-import Dashboard from "../Dashboard/Dashboard";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Orders from "../Orders/Orders";
 import Menu from "../Menu/Menu";
 import FoodCategory from "../FoodCategory/FoodCategory";
@@ -16,11 +15,11 @@ import { IconButton } from "@mui/material";
 import { getRestaurantsOrder } from "../../state/RestaurantOrder/Action";
 import { getIngredientsOfRestaurant } from "../../state/Ingredients/Action";
 
-
 const Admin = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const jwt = localStorage.getItem("jwt");
+  const navigate = useNavigate();
 
   const usersRestaurant = useSelector(
     (store) => store.restaurant.usersRestaurant
@@ -37,17 +36,16 @@ const Admin = () => {
     dispatch(
       getRestaurantsOrder({ jwt: jwt, restaurantId: usersRestaurant?.id })
     );
-    dispatch(
-      getIngredientsOfRestaurant({ id: usersRestaurant?.id,jwt: jwt})
-    );
-
-    
+    dispatch(getIngredientsOfRestaurant({ id: usersRestaurant?.id, jwt: jwt }));
   }, [usersRestaurant, jwt, dispatch]);
 
   return (
     <div>
       <div className="px-3 sticky top-0 py-2 bg-[#b80742] flex justify-between">
-        <div className="lg:mr-10 cursor-pointer flex items-center space-x-2">
+        <div
+          className="lg:mr-10 cursor-pointer flex items-center space-x-2"
+          onClick={() => navigate("/")}
+        >
           <img
             src="https://res.cloudinary.com/debpngulj/image/upload/v1758378624/Aldjwx9IZEnqwEt1zYxhBySZE3_rTGMgKm-9fIUnrX12_eHw6Mg7EevhnP14BLfDjkI_fjerry.png"
             className="h-[3.4rem] w-[3.4rem] object-cover object-center rounded-full "
@@ -72,7 +70,6 @@ const Admin = () => {
 
         <div className="lg:w-[80%] px-1">
           <Routes>
-            <Route path="/" element={<Dashboard />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/category" element={<FoodCategory />} />

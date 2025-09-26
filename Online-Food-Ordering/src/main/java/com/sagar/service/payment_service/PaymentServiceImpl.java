@@ -27,7 +27,7 @@ public class PaymentServiceImpl implements PaymentService{
                 .addLineItem(SessionCreateParams.LineItem.builder()
                         .setQuantity(1L).setPriceData(SessionCreateParams.LineItem.PriceData.builder()
                                 .setCurrency("inr")
-                                .setUnitAmount((long) order.getTotalPrice()*100)
+                                .setUnitAmount((long) order.getTotalPrice()*100+5800)
                                 .setProductData(SessionCreateParams.LineItem.PriceData.ProductData.builder()
                                         .setName("hungry hut")
                                         .build()

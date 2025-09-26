@@ -1,31 +1,41 @@
 import { Card, CardActions, CardContent, CardMedia, IconButton, Typography } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useDispatch } from "react-redux";
+import { deleteEvent } from "../../state/Restaurant/Action";
 
-const EventCard = () => {
+const EventCard = ({accessButton,event}) => {
+
+  const dispatch = useDispatch();
+
+
+  const handleDelete = (eventId) => {
+    dispatch(deleteEvent({eventId,jwt:localStorage.getItem("jwt")}));
+  }
+  
   return (
     <div className="">
-      <Card sx={{width:345}}>
+      <Card sx={{width:250}}>
         <CardMedia
-          sx={{ height: 345 }}
-          image="https://images.pexels.com/photos/4886378/pexels-photo-4886378.jpeg"
+          sx={{ height: 305 }}
+          image={event?.imageUrl}
         />
         <CardContent>
             <Typography variant="h5">
-                Indian Fast Food
+                {event?.name}
             </Typography>
             <Typography variant="body2">
-                50% off on your first order
+                {event?.restaurant.name}
             </Typography>
-            <div className="py-2 space-y-2">
-                <p>{"Mumbai"}</p>
-                <p className="text-sm text-blue-500">February 14, 2025 12:00 AM</p>
-                <p className="text-sm text-red-500">February 24, 2025 12:00 AM</p>
+            <div className="py-1 space-y-1">
+                <p>{event?.location}</p>
+                <p className="text-sm text-green-500">{event?.startedAt}</p>
+                <p className="text-sm text-orange-300">{event?.endsAt}</p>
             </div>
         </CardContent>
-        {true && 
+        {accessButton && 
             <CardActions>
-                <IconButton>
-                    <DeleteIcon/>
+                <IconButton onClick={()=>handleDelete(event.id)}>
+                    <DeleteIcon color="error" />
                 </IconButton>
             </CardActions>
         }

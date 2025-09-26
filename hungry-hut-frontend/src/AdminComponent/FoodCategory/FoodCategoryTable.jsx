@@ -32,7 +32,7 @@ const FoodCategoryTable = () => {
 
   return (
     <Box>
-      <Card className="mt-1">
+      <Card className="mt-1 w-fit">
         <CardHeader
           title={"Food Category"}
           sx={{ pt: 2, alignItems: "center" }}
@@ -43,7 +43,7 @@ const FoodCategoryTable = () => {
           }
         />
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table sx={{ minWidth: 330 }} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell align="left">Id</TableCell>
