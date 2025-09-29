@@ -31,8 +31,12 @@ This is a full-stack web application built using the **MERN** stack, designed to
 
 ---
 
-## 🛠️ Development Tools
-- **Visual Studio Code** – Primary IDE for React and Node.js development
+### 🛠️ Development Tools
+
+| Tool              | Usage                                         |
+|-------------------|-----------------------------------------------|
+| **IntelliJ IDEA** | Backend development with Spring Boot          |
+| **VS Code**       | Frontend development with React               |
 
 ---
 
@@ -234,53 +238,5 @@ Represents an item added to the cart.
 
 ---
 
-## 🔧 Tech Stack Overview
 
-This project is a full-stack web application built using **React** for the frontend and **Spring Boot** for the backend. It supports secure authentication, role-based access, email notifications, and Stripe-powered payments.
 
----
-
-### 🧠 Backend – Spring Boot
-
-| Technology         | Purpose                                      |
-|--------------------|----------------------------------------------|
-| **Spring Boot**    | Backend framework for building REST APIs     |
-| **Spring Security**| Authentication and role-based authorization  |
-| **JWT (JSON Web Token)** | Stateless session management           |
-| **MySQL**          | Relational database for persistent storage   |
-
----
-
-### 🎨 Frontend – React
-
-| Technology         | Purpose                                      |
-|--------------------|----------------------------------------------|
-| **React.js**       | Component-based UI framework                 |
-| **Tailwind CSS**   | Utility-first CSS styling                   |
-| **Material UI (MUI)** | Pre-built UI components                  |
-| **Redux**          | State management across components           |
-| **Axios**          | HTTP client for API communication            |
-
----
-
-### 💳 Payment Integration
-
-- **Stripe** – Secure payment gateway for handling transactions
-
----
-
-### 🔐 Role-Based Access
-
-- `ROLE_CUSTOMER` – Browse restaurants, place orders, make payments  
-- `ROLE_RESTAURANT_OWNER` – Manage menu, view orders, track revenue
-
----
-
-### 🛠️ Development Tools
-
-| Tool              | Usage                                         |
-|-------------------|-----------------------------------------------|
-| **IntelliJ IDEA** | Backend development with Spring Boot          |
-| **VS Code**       | Frontend development with React               |
-
----
