@@ -4,20 +4,118 @@ This is a full-stack web application built using the **MERN** stack, designed to
 
 ---
 
-## 🚀 Tech Stack
+## 🔙 Backend Dependencies (Spring Boot – Maven)
 
-### 🧠 Backend
-- **Node.js** – JavaScript runtime for server-side logic
-- **Express.js** – Web framework for building RESTful APIs
-- **MongoDB** – NoSQL database for storing user, restaurant, and order data
-- **JWT (JSON Web Token)** – Secure authentication and session management
+This project uses **Spring Boot 3.4.8** with Java 17, integrating secure authentication, Stripe payments, JWT, and MySQL. Below is a breakdown of the key dependencies used in the `pom.xml`.
 
-### 🎨 Frontend
-- **React.js** – Component-based UI framework
-- **Tailwind CSS** – Utility-first CSS framework for rapid styling
-- **Material UI (MUI)** – Pre-built React components for consistent design
-- **Redux** – State management across components
-- **Axios** – HTTP client for API communication
+### 🌐 Core Frameworks
+| Dependency                         | Purpose                                      |
+|------------------------------------|----------------------------------------------|
+| `spring-boot-starter-web`          | Build RESTful APIs and web services          |
+| `spring-boot-starter-data-jpa`     | ORM and database interaction via JPA         |
+| `spring-boot-starter-security`     | Authentication and authorization             |
+| `spring-boot-devtools`             | Hot reload and dev-time enhancements         |
+
+---
+
+### 🔐 Security & Authentication
+| Dependency                         | Purpose                                      |
+|------------------------------------|----------------------------------------------|
+| `jjwt-api`, `jjwt-impl`, `jjwt-jackson` | JSON Web Token authentication stack     |
+| `spring-security-test`             | Security testing utilities                   |
+
+---
+
+### 💳 Payment Integration
+| Dependency                         | Purpose                                      |
+|------------------------------------|----------------------------------------------|
+| `stripe-java`                      | Stripe SDK for payment gateway integration   |
+
+---
+
+### 🧰 Utilities
+| Dependency                         | Purpose                                      |
+|------------------------------------|----------------------------------------------|
+| `mysql-connector-j`                | MySQL database driver                        |
+| `lombok`                           | Reduces boilerplate in Java classes          |
+
+---
+
+### 🧪 Testing
+| Dependency                         | Purpose                                      |
+|------------------------------------|----------------------------------------------|
+| `spring-boot-starter-test`         | Core testing framework for Spring Boot       |
+
+---
+
+### ⚙️ Build Plugins
+| Plugin                             | Purpose                                      |
+|------------------------------------|----------------------------------------------|
+| `maven-compiler-plugin`            | Java compilation and annotation processing   |
+| `spring-boot-maven-plugin`         | Package and run Spring Boot apps             |
+
+---
+
+## 📦 Frontend Dependencies
+
+This project uses a modern React stack with powerful libraries for UI, state management, routing, form handling, and testing.
+
+### 🖼️ UI & Styling
+| Package                  | Purpose                                      |
+|--------------------------|----------------------------------------------|
+| `@mui/material`          | Material UI components                      |
+| `@mui/icons-material`    | Icon set for MUI                            |
+| `@emotion/react`         | Emotion styling engine                      |
+| `@emotion/styled`        | Styled components with Emotion              |
+| `@mui/system`            | MUI system utilities                        |
+| `@mui/base`              | Low-level UI primitives                     |
+| `@mui/x-date-pickers`    | Date picker components                      |
+| `tailwindcss` *(optional)* | Utility-first CSS framework              |
+| `react-slick`            | Carousel/slider component                   |
+| `slick-carousel`         | Slick styles for `react-slick`              |
+
+### 🧠 State & Routing
+| Package           | Purpose                                      |
+|-------------------|----------------------------------------------|
+| `redux`           | Global state management                     |
+| `react-redux`     | React bindings for Redux                    |
+| `redux-thunk`     | Middleware for async actions                |
+| `react-router-dom`| Client-side routing                         |
+
+### 📬 API & Utilities
+| Package       | Purpose                                      |
+|---------------|----------------------------------------------|
+| `axios`       | HTTP client for API calls                    |
+| `dayjs`       | Lightweight date/time manipulation           |
+
+### 📝 Forms & Validation
+| Package   | Purpose                                      |
+|-----------|----------------------------------------------|
+| `formik`  | Form state management and submission         |
+| `yup`     | Schema-based form validation                 |
+
+### 🔔 Notifications
+| Package             | Purpose                                      |
+|---------------------|----------------------------------------------|
+| `react-toastify`    | Toast notifications                         |
+
+### 🧪 Testing
+| Package                     | Purpose                                      |
+|-----------------------------|----------------------------------------------|
+| `@testing-library/react`    | React component testing                     |
+| `@testing-library/jest-dom` | Custom matchers for Jest                   |
+| `@testing-library/user-event` | Simulate user interactions               |
+| `@testing-library/dom`      | DOM testing utilities                      |
+
+### ⚙️ Core React
+| Package       | Purpose                                      |
+|---------------|----------------------------------------------|
+| `react`       | Core React library                          |
+| `react-dom`   | DOM rendering for React                     |
+| `react-scripts` | CRA build scripts                        |
+| `web-vitals`  | Performance metrics                         |
+
+---
 
 ### 💳 Payment
 - **Stripe** – Integrated payment gateway for secure transactions
