@@ -11,7 +11,6 @@ This is a full-stack web application built using the **MERN** stack, designed to
 - **Express.js** – Web framework for building RESTful APIs
 - **MongoDB** – NoSQL database for storing user, restaurant, and order data
 - **JWT (JSON Web Token)** – Secure authentication and session management
-- **Nodemailer** – Email service integration (e.g., order confirmations)
 
 ### 🎨 Frontend
 - **React.js** – Component-based UI framework
@@ -46,14 +45,8 @@ This is a full-stack web application built using the **MERN** stack, designed to
 - Restaurant listing and menu management
 - Cart functionality and order placement
 - Stripe-powered payment flow
-- Email notifications via Nodemailer
 - Responsive UI with Tailwind and MUI
 - State persistence using Redux
-
----
-
-## 📁 Folder Structure (optional to include later)
-You can add a section here to explain your folder organization once your project scales.
 
 ---
 
