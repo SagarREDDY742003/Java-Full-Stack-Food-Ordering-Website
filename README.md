@@ -247,7 +247,6 @@ This project is a full-stack web application built using **React** for the front
 | **Spring Boot**    | Backend framework for building REST APIs     |
 | **Spring Security**| Authentication and role-based authorization  |
 | **JWT (JSON Web Token)** | Stateless session management           |
-| **Spring Starter Mail** | Email service integration via SMTP      |
 | **MySQL**          | Relational database for persistent storage   |
 
 ---
