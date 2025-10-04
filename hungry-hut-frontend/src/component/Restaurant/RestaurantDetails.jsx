@@ -65,7 +65,7 @@ const RestaurantDetails = () => {
 
 
   return (
-    <div className="px-5 lg:px-20">
+    <div className="px-5 lg:px-20 pb-10 pt-4">
       <section>
 
         <div>

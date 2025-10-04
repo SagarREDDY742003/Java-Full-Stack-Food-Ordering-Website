@@ -12,7 +12,7 @@ const Orders = () => {
     dispatch(getUsersOrder(jwt));
   }, [auth.jwt, jwt, dispatch]);
   return (
-    <div className="flex items-center flex-col">
+    <div className="flex items-center flex-col pb-5">
       <h1 className="text-xl font-semibold py-7 text-center">My Orders</h1>
       <div className="flex flex-wrap gap-5 justify-around">
           {order.orders.map((order) => (

@@ -67,7 +67,7 @@ const CreateMenuForm = () => {
   };
 
   return (
-    <div className="py-10 px-5 lg:flex items-center justify-center min-h-screen">
+    <div className="py-10 px-5 lg:flex  justify-center min-h-screen">
       <div className="lg:max-w-4xl">
         <h1 className="font-bold text-2xl text-center py-2">Add New Menu</h1>
         <form onSubmit={formik.handleSubmit} className="space-y-4">

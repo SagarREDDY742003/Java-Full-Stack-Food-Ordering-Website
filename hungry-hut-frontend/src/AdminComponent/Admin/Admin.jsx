@@ -41,7 +41,7 @@ const Admin = () => {
 
   return (
     <div>
-      <div className="px-3 sticky top-0 py-2 bg-[#b80742] flex justify-between">
+      <div className="px-3 sticky top-0 py-2 bg-[#b80742] flex justify-between z-50">
         <div
           className="lg:mr-10 cursor-pointer flex items-center space-x-2"
           onClick={() => navigate("/")}
@@ -64,7 +64,7 @@ const Admin = () => {
       </div>
 
       <div className="lg:flex justify-between space-y-3">
-        <div>
+        <div className="z-20">
           <AdminSideBar open={open} handleClose={handleClose} />
         </div>
 

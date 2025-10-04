@@ -32,7 +32,7 @@ const ProfileNavigation = ({ open, handleClose }) => {
     if (item.title === "Logout") {
       dispatch(logout());
       navigate("/");
-      window.location.reload();
+      setTimeout(() => window.location.reload(), 100);
     } else {
       navigate(`/my-profile/${item.title.toLowerCase()}`);
     }
@@ -48,7 +48,7 @@ const ProfileNavigation = ({ open, handleClose }) => {
         open={isSmallScreen ? open : true}
         sx={{ zIndex: 12}}
       >
-        <div className="w-fit lg:w-[20vw] h-[100vh] flex flex-col justify-center text-xl gap-8 pt-16">
+        <div className="w-fit lg:w-[20vw] h-[100vh] flex flex-col justify-center text-xl gap-6 pt-16">
           {menu.map((item, i) => (
             <div key={item.title}>
               <div

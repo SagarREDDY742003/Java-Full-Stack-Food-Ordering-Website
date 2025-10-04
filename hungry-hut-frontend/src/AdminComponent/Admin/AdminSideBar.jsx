@@ -51,7 +51,7 @@ const AdminSideBar = ({ handleClose, open }) => {
           open={open}
           onClose={handleClose}
         >
-          <div className=" w-auto h-screen flex flex-col justify-center text-xl lg:space-y-[1.6rem] space-y-[1rem] ">
+          <div className=" w-auto h-screen flex flex-col justify-center text-xl lg:space-y-[1.6rem] space-y-[1rem]">
             {menu.map((item, i) => (
               <>
                 <div

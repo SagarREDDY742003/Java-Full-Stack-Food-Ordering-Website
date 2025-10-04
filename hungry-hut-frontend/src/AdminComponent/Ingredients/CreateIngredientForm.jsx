@@ -23,7 +23,6 @@ const CreateIngredientForm = () => {
       categoryId:FormData.categoryId,
       restaurantId:restaurant.id
     };
-    console.log(data);
     dispatch(createIngredient({data:data,jwt:localStorage.getItem("jwt")}));
     
   };

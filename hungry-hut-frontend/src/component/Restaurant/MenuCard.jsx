@@ -9,10 +9,12 @@ import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../state/Cart/Action";
 import "react-toastify/dist/ReactToastify.css";
 import { Toast } from "../util/Toast";
+import { useNavigate } from "react-router-dom";
 
 const MenuCard = ({ item }) => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleAddItemToCart = (e) => {
     e.preventDefault();
@@ -25,6 +27,7 @@ const MenuCard = ({ item }) => {
       },
     };
     dispatch(addItemToCart(reqData));
+    navigate("/cart");
     Toast("Item added to cart!","add-item-to-cart");
   };
 
@@ -90,11 +93,11 @@ const MenuCard = ({ item }) => {
             <div>
               <Button
                 variant="contained"
-                disabled={false}
+                disabled={item.available ? false : true}
                 type="submit"
                 className="pt-5"
               >
-                {true ? "Add to Cart" : "Out of Stock"}
+                {item.available ? "Add to Cart" : "Out of Stock"}
               </Button>
             </div>
           </form>
