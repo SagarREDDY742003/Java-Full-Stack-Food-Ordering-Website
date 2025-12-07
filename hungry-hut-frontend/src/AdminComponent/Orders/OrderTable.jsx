@@ -9,7 +9,7 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -30,23 +30,37 @@ const orderStatus = [
   { label: "Delivered", value: "DELIVERED" },
 ];
 
-const OrderTable = ({filter}) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+const OrderTable = ({ filter }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
+
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+
+  const handleClick = (event, orderId) => {
     setAnchorEl(event.currentTarget);
+    setSelectedOrderId(orderId);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
+    setSelectedOrderId(null);
   };
 
   const dispatch = useDispatch();
   const restaurant = useSelector((store) => store.restaurant.usersRestaurant);
-  const orderBeforeFilter = useSelector((store) => store.restaurantOrder.orders);
-  const orders = filter === "ALL" ? orderBeforeFilter : orderBeforeFilter?.filter((order) => order.orderStatus === filter);
-  console.log(orders)
+  const orderBeforeFilter = useSelector(
+    (store) => store.restaurantOrder.orders
+  );
+
+  const orders =
+    filter === "ALL"
+      ? orderBeforeFilter
+      : orderBeforeFilter?.filter((order) => order.orderStatus === filter);
+
+  console.log(orders);
 
   useEffect(() => {
+    if (!restaurant?.id) return;
     dispatch(
       getRestaurantsOrder({
         jwt: localStorage.getItem("jwt"),
@@ -55,10 +69,11 @@ const OrderTable = ({filter}) => {
     );
   }, [dispatch, restaurant]);
 
-  const handleOrderStatus = (orderId, orderStatus) => {
+  const handleOrderStatus = (orderStatus) => {
+    if (!selectedOrderId) return;
     dispatch(
       updateOrderStatus({
-        orderId,
+        orderId: selectedOrderId,
         orderStatus,
         jwt: localStorage.getItem("jwt"),
       })
@@ -72,7 +87,7 @@ const OrderTable = ({filter}) => {
         <CardHeader title={"All Orders"} sx={{ pt: 2, alignItems: "center" }} />
         <CardContent>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table sx={{ minWidth: 650 }} aria-label="orders table">
               <TableHead>
                 <TableRow>
                   <TableCell align="center">Id</TableCell>
@@ -91,20 +106,28 @@ const OrderTable = ({filter}) => {
                     key={order.id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
+                    <TableCell align="center">{order.id}</TableCell>
+
                     <TableCell align="center">
-                      {order.id}
-                    </TableCell>
-                    <TableCell align="center">
-                      <div className="flex flex-wrap gap-1">
+                      <div className="flex flex-wrap gap-1 justify-center">
                         {order.items.map((item) => (
-                          <Avatar src={item.food.images[0]} />
+                          <Avatar
+                            key={item.id}
+                            src={item.food.images[0]}
+                            alt={item.food.name}
+                          />
                         ))}
                       </div>
                     </TableCell>
+
                     <TableCell align="center">
                       {order.customer.fullName}
                     </TableCell>
-                    <TableCell align="center">{"₹"+order.totalPrice}</TableCell>
+
+                    <TableCell align="center">
+                      {"₹" + order.totalPrice}
+                    </TableCell>
+
                     <TableCell align="center">
                       <div className="flex flex-wrap gap-1 justify-center">
                         {order.items?.map((item) => (
@@ -112,6 +135,7 @@ const OrderTable = ({filter}) => {
                         ))}
                       </div>
                     </TableCell>
+
                     <TableCell align="center">
                       <div className="flex flex-wrap gap-1 justify-center">
                         {[
@@ -123,40 +147,47 @@ const OrderTable = ({filter}) => {
                         ))}
                       </div>
                     </TableCell>
+
                     <TableCell align="center">{order.orderStatus}</TableCell>
+
                     <TableCell align="center">
                       <Button
-                        id="basic-button"
-                        aria-controls={open ? "basic-menu" : undefined}
+                        id={`update-status-btn-${order.id}`}
+                        aria-controls={open ? "order-status-menu" : undefined}
                         aria-haspopup="true"
                         aria-expanded={open ? "true" : undefined}
-                        onClick={handleClick}
+                        onClick={(event) => handleClick(event, order.id)}
                         variant="outlined"
                       >
                         Update Status
                       </Button>
-                      <Menu
-                        id="basic-menu"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        slotProps={{
-                          list: {
-                            "aria-labelledby": "basic-button",
-                          },
-                        }}
-                      >
-                        {orderStatus.map((item) => (
-                          <MenuItem key={item.value} onClick={()=>handleOrderStatus(order.id,item.value)}>
-                            {item.label}
-                          </MenuItem>
-                        ))}
-                      </Menu>
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
+
+            {/* Single Menu controlled by anchorEl + selectedOrderId */}
+            <Menu
+              id="order-status-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              slotProps={{
+                list: {
+                  "aria-labelledby": "basic-button",
+                },
+              }}
+            >
+              {orderStatus.map((item) => (
+                <MenuItem
+                  key={item.value}
+                  onClick={() => handleOrderStatus(item.value)}
+                >
+                  {item.label}
+                </MenuItem>
+              ))}
+            </Menu>
           </TableContainer>
         </CardContent>
       </Card>
@@ -165,3 +196,4 @@ const OrderTable = ({filter}) => {
 };
 
 export default OrderTable;
+
