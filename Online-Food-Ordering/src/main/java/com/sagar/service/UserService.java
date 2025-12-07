@@ -1,12 +1,12 @@
 package com.sagar.service;
 
-import com.sagar.model.User;
+import com.sagar.model.Users;
 import org.springframework.context.annotation.Bean;
 
 public interface UserService {
 
-    public User findUserByJwtToken(String jwt) throws Exception;
+    public Users findUserByJwtToken(String jwt) throws Exception;
 
-    public User findUserByEmail(String email) throws Exception;
+    public Users findUserByEmail(String email) throws Exception;
 
 }

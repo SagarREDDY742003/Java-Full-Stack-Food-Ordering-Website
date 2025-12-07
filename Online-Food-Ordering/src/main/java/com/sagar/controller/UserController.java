@@ -1,6 +1,6 @@
 package com.sagar.controller;
 
-import com.sagar.model.User;
+import com.sagar.model.Users;
 import com.sagar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +17,8 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/profile")
-    public ResponseEntity<User> findUserByJwtToken(@RequestHeader("Authorization") String jwt) throws Exception {
-        User user = userService.findUserByJwtToken(jwt);
+    public ResponseEntity<Users> findUserByJwtToken(@RequestHeader("Authorization") String jwt) throws Exception {
+        Users user = userService.findUserByJwtToken(jwt);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }

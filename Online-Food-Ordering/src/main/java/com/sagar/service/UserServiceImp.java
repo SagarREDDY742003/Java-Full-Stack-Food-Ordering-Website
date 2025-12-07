@@ -1,7 +1,7 @@
 package com.sagar.service;
 
 import com.sagar.config.JwtProvider;
-import com.sagar.model.User;
+import com.sagar.model.Users;
 import com.sagar.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,16 +16,16 @@ public class UserServiceImp  implements UserService{
     private JwtProvider jwtProvider;
 
     @Override
-    public User findUserByJwtToken(String jwt) throws Exception {
+    public Users findUserByJwtToken(String jwt) throws Exception {
         String email = jwtProvider.getEmailFromJwtToken(jwt);
-        User user = findUserByEmail(email);
+        Users user = findUserByEmail(email);
 
         return user;
     }
 
     @Override
-    public User findUserByEmail(String email) throws Exception {
-        User user = userRepository.findByEmail(email);
+    public Users findUserByEmail(String email) throws Exception {
+        Users user = userRepository.findByEmail(email);
 
         if(user==null)
             throw new Exception("user not found");

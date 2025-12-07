@@ -24,7 +24,7 @@ public class Order {
     private Long id;
 
     @ManyToOne
-    private User customer;
+    private Users customer;
 
     @ManyToOne
     @JsonIgnore

@@ -3,7 +3,7 @@ package com.sagar.service.restaurant_services;
 import com.sagar.dto.RestaurantDto;
 import com.sagar.model.Address;
 import com.sagar.model.Restaurant;
-import com.sagar.model.User;
+import com.sagar.model.Users;
 import com.sagar.repository.AddressRepository;
 import com.sagar.repository.RestaurantRepository;
 import com.sagar.repository.UserRepository;
@@ -29,7 +29,7 @@ public class RestaurantServiceImp implements RestaurantService {
     private UserRepository userRepository;
 
     @Override
-    public Restaurant createRestaurant(CreateRestaurantRequest req, User user) {
+    public Restaurant createRestaurant(CreateRestaurantRequest req, Users user) {
 
         Address address = addressRepository.save(req.getAddress());
 
@@ -117,7 +117,7 @@ public class RestaurantServiceImp implements RestaurantService {
     }
 
     @Override
-    public RestaurantDto addToFavorites(Long restaurantId, User user) throws Exception {
+    public RestaurantDto addToFavorites(Long restaurantId, Users user) throws Exception {
 
         Restaurant restaurant = findRestaurantById(restaurantId);
 

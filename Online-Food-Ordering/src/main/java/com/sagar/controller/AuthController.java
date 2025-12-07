@@ -3,7 +3,7 @@ package com.sagar.controller;
 import com.sagar.config.JwtProvider;
 import com.sagar.model.Cart;
 import com.sagar.model.USER_ROLE;
-import com.sagar.model.User;
+import com.sagar.model.Users;
 import com.sagar.repository.CartRepository;
 import com.sagar.repository.UserRepository;
 import com.sagar.request.LoginRequest;
@@ -44,20 +44,20 @@ public class AuthController {
     private CartRepository cartRepository;
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws Exception{
+    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody Users user) throws Exception{
 
-        User isEmailExist = userRepository.findByEmail(user.getEmail());
+        Users isEmailExist = userRepository.findByEmail(user.getEmail());
         if (isEmailExist != null) {
             throw new Exception("Email is already used with another account");
         }
 
-        User createdUser = new User();
+        Users createdUser = new Users();
         createdUser.setEmail(user.getEmail());
         createdUser.setFullName(user.getFullName());
         createdUser.setRole(user.getRole());
         createdUser.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        User savedUser = userRepository.save(createdUser);
+        Users savedUser = userRepository.save(createdUser);
 
         Cart cart = new Cart();
         cart.setCustomer(savedUser);

@@ -2,7 +2,7 @@ package com.sagar.controller.restaurant_controller;
 
 import com.sagar.dto.RestaurantDto;
 import com.sagar.model.Restaurant;
-import com.sagar.model.User;
+import com.sagar.model.Users;
 import com.sagar.service.UserService;
 import com.sagar.service.restaurant_services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class CustomerRestaurantController {
     @GetMapping("/search")
     public ResponseEntity<List<Restaurant>> searchRestaurant(@RequestHeader("Authorization") String jwt, @RequestParam String keyword) throws Exception {
 
-        User user = userService.findUserByJwtToken(jwt);
+        Users user = userService.findUserByJwtToken(jwt);
 
         List<Restaurant> restaurant = restaurantService.searchRestaurant(keyword);
 
@@ -35,7 +35,7 @@ public class CustomerRestaurantController {
     @GetMapping()
     public ResponseEntity<List<Restaurant>> getAllRestaurants(@RequestHeader("Authorization") String jwt) throws Exception {
 
-        User user = userService.findUserByJwtToken(jwt);
+        Users user = userService.findUserByJwtToken(jwt);
 
         List<Restaurant> restaurant = restaurantService.getAllRestaurants();
 
@@ -45,7 +45,7 @@ public class CustomerRestaurantController {
     @GetMapping("/{id}")
     public ResponseEntity<Restaurant> findRestaurantById(@RequestHeader("Authorization") String jwt, @PathVariable Long id) throws Exception {
 
-        User user = userService.findUserByJwtToken(jwt);
+        Users user = userService.findUserByJwtToken(jwt);
 
         Restaurant restaurant = restaurantService.findRestaurantById(id);
 
@@ -55,7 +55,7 @@ public class CustomerRestaurantController {
     @PutMapping("/{id}/add-favorites")
     public ResponseEntity<RestaurantDto> addToFavorites(@RequestHeader("Authorization") String jwt, @PathVariable Long id) throws Exception {
 
-        User user = userService.findUserByJwtToken(jwt);
+        Users user = userService.findUserByJwtToken(jwt);
 
         RestaurantDto restaurant = restaurantService.addToFavorites(id,user);
 

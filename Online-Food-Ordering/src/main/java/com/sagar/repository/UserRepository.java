@@ -1,10 +1,10 @@
 package com.sagar.repository;
 
-import com.sagar.model.User;
+import com.sagar.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User,Long> {
+public interface UserRepository extends JpaRepository<Users,Long> {
 
-    public User findByEmail(String username);
+    public Users findByEmail(String username);
 
 }

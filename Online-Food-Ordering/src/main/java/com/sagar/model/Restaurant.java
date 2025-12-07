@@ -21,7 +21,7 @@ public class Restaurant {
     private Long id;
 
     @OneToOne
-    private User owner;
+    private Users owner;
 
     private String name;
 

@@ -1,7 +1,7 @@
 package com.sagar.controller.order_controller;
 
 import com.sagar.model.Order;
-import com.sagar.model.User;
+import com.sagar.model.Users;
 import com.sagar.request.OrderRequest;
 import com.sagar.response.PaymentResponse;
 import com.sagar.service.UserService;
@@ -32,7 +32,7 @@ public class OrderController {
             @RequestBody OrderRequest req,
             @RequestHeader("Authorization") String jwt) throws Exception {
 
-        User user = userService.findUserByJwtToken(jwt);
+        Users user = userService.findUserByJwtToken(jwt);
         Order order = orderService.createOrder(req,user);
         PaymentResponse res = paymentService.createPaymentLink(order);
 
@@ -43,7 +43,7 @@ public class OrderController {
     @GetMapping("/order/user")
     public ResponseEntity<List<Order>> getOrderHistory(@RequestHeader("Authorization") String jwt) throws Exception {
 
-        User user = userService.findUserByJwtToken(jwt);
+        Users user = userService.findUserByJwtToken(jwt);
         List<Order> orders = orderService.getUsersOrder(user.getId());
 
         return new ResponseEntity<>(orders, HttpStatus.OK);
