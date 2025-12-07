@@ -2,7 +2,7 @@ package com.sagar.controller.food_controller;
 
 import com.sagar.model.Food;
 import com.sagar.model.Restaurant;
-import com.sagar.model.Users;
+import com.sagar.model.User;
 import com.sagar.request.CreateFoodRequest;
 import com.sagar.response.MessageResponse;
 import com.sagar.service.UserService;
@@ -29,7 +29,7 @@ public class AdminFoodController {
     @PostMapping
     public ResponseEntity<Food> createFood(@RequestBody CreateFoodRequest req, @RequestHeader("Authorization") String jwt) throws Exception{
 
-        Users user = userService.findUserByJwtToken(jwt);
+        User user = userService.findUserByJwtToken(jwt);
 
         Restaurant restaurant = restaurantService.findRestaurantById(req.getRestaurantId());
         Food food = foodService.createFood(req,req.getCategory(),restaurant);
@@ -41,7 +41,7 @@ public class AdminFoodController {
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponse> deleteFood(@RequestHeader("Authorization") String jwt, @PathVariable Long id) throws Exception{
 
-        Users user = userService.findUserByJwtToken(jwt);
+        User user = userService.findUserByJwtToken(jwt);
 
         foodService.deleteFood(id);
         MessageResponse messageResponse = new MessageResponse();
@@ -54,7 +54,7 @@ public class AdminFoodController {
     @PutMapping("/{id}")
     public ResponseEntity<Food> updateFoodAvailabilityStatus(@PathVariable Long  id, @RequestHeader("Authorization") String jwt) throws Exception{
 
-        Users user = userService.findUserByJwtToken(jwt);
+        User user = userService.findUserByJwtToken(jwt);
 
         Food food = foodService.updateFoodAvailabilityStatus(id);
 

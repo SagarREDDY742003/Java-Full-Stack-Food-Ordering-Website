@@ -2,7 +2,7 @@ package com.sagar.controller;
 
 import com.sagar.model.Cart;
 import com.sagar.model.CartItem;
-import com.sagar.model.Users;
+import com.sagar.model.User;
 import com.sagar.request.AddCartItemRequest;
 import com.sagar.request.UpdateCartItemRequest;
 import com.sagar.service.UserService;
@@ -56,7 +56,7 @@ public class CartController {
     public ResponseEntity<Cart> clearCart(
             @RequestHeader("Authorization") String jwt) throws Exception {
 
-        Users user = userService.findUserByJwtToken(jwt);
+        User user = userService.findUserByJwtToken(jwt);
         Cart cart = cartService.clearCart(user.getId());
 
         return new ResponseEntity<>(cart, HttpStatus.OK);
@@ -67,7 +67,7 @@ public class CartController {
     public ResponseEntity<Cart> findUserCart(
             @RequestHeader("Authorization") String jwt) throws Exception {
 
-        Users user = userService.findUserByJwtToken(jwt);
+        User user = userService.findUserByJwtToken(jwt);
         Cart cart = cartService.findCartByUserId(user.getId());
 
         return new ResponseEntity<>(cart, HttpStatus.OK);

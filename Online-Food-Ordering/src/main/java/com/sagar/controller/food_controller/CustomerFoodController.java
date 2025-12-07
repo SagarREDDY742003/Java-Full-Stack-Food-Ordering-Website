@@ -2,7 +2,7 @@ package com.sagar.controller.food_controller;
 
 import com.sagar.model.Food;
 import com.sagar.model.Restaurant;
-import com.sagar.model.Users;
+import com.sagar.model.User;
 import com.sagar.request.CreateFoodRequest;
 import com.sagar.service.UserService;
 import com.sagar.service.food_service.FoodService;
@@ -30,7 +30,7 @@ public class CustomerFoodController {
     @GetMapping("/search")
     public ResponseEntity<List<Food>> searchFood(@RequestParam String name, @RequestHeader("Authorization") String jwt) throws Exception{
 
-        Users user = userService.findUserByJwtToken(jwt);
+        User user = userService.findUserByJwtToken(jwt);
 
         List<Food> foods = foodService.searchFood(name);
 
@@ -47,7 +47,7 @@ public class CustomerFoodController {
             @PathVariable Long id,
             @RequestHeader("Authorization") String jwt) throws Exception{
 
-        Users user = userService.findUserByJwtToken(jwt);
+        User user = userService.findUserByJwtToken(jwt);
 
         List<Food> foods = foodService.getRestaurantsFood(id,vegetarian,nonveg,seasonal,food_category);
 

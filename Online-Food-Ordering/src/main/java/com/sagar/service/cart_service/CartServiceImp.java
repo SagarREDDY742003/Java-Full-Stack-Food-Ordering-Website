@@ -3,7 +3,7 @@ package com.sagar.service.cart_service;
 import com.sagar.model.Cart;
 import com.sagar.model.CartItem;
 import com.sagar.model.Food;
-import com.sagar.model.Users;
+import com.sagar.model.User;
 import com.sagar.repository.CartItemRepository;
 import com.sagar.repository.CartRepository;
 import com.sagar.repository.FoodRepository;
@@ -34,7 +34,7 @@ public class CartServiceImp implements CartService{
     @Override
     public CartItem addItemToCart(AddCartItemRequest req, String jwt) throws Exception {
 
-        Users user = userService.findUserByJwtToken(jwt);
+        User user = userService.findUserByJwtToken(jwt);
         Food food = foodService.findFoodById(req.getFoodId());
         Cart cart = cartRepository.findByCustomerId(user.getId());
 
@@ -79,7 +79,7 @@ public class CartServiceImp implements CartService{
     @Override
     public Cart removeItemFromCart(Long cartItemId, String jwt) throws Exception {
 
-        Users user = userService.findUserByJwtToken(jwt);
+        User user = userService.findUserByJwtToken(jwt);
         Cart cart = cartRepository.findByCustomerId(user.getId());
 
         Optional<CartItem> cartItemOptional = cartItemRepository.findById(cartItemId);

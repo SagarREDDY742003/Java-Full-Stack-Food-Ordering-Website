@@ -1,7 +1,7 @@
 package com.sagar.controller.restaurant_controller;
 
 import com.sagar.model.Restaurant;
-import com.sagar.model.Users;
+import com.sagar.model.User;
 import com.sagar.request.CreateRestaurantRequest;
 import com.sagar.response.MessageResponse;
 import com.sagar.service.UserService;
@@ -24,7 +24,7 @@ public class AdminRestaurantController {
     @PostMapping()
     public ResponseEntity<Restaurant> createRestaurant(@RequestBody CreateRestaurantRequest req, @RequestHeader("Authorization") String jwt) throws Exception {
 
-        Users user = userService.findUserByJwtToken(jwt);
+        User user = userService.findUserByJwtToken(jwt);
 
         Restaurant restaurant = restaurantService.createRestaurant(req,user);
 
@@ -34,7 +34,7 @@ public class AdminRestaurantController {
     @PutMapping("/{id}")
     public ResponseEntity<Restaurant> updateRestaurant(@RequestBody CreateRestaurantRequest req, @RequestHeader("Authorization") String jwt, @PathVariable Long id) throws Exception {
 
-        Users user = userService.findUserByJwtToken(jwt);
+        User user = userService.findUserByJwtToken(jwt);
 
         Restaurant restaurant = restaurantService.updateRestaurant(id,req);
 
@@ -45,7 +45,7 @@ public class AdminRestaurantController {
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponse> deleteRestaurant(@RequestHeader("Authorization") String jwt, @PathVariable Long id) throws Exception {
 
-        Users user = userService.findUserByJwtToken(jwt);
+        User user = userService.findUserByJwtToken(jwt);
 
         restaurantService.deleteRestaurant(id);
 
@@ -59,7 +59,7 @@ public class AdminRestaurantController {
     @PutMapping("/{id}/status")
     public ResponseEntity<Restaurant> updateRestaurantStatus(@RequestHeader("Authorization") String jwt, @PathVariable Long id) throws Exception {
 
-        Users user = userService.findUserByJwtToken(jwt);
+        User user = userService.findUserByJwtToken(jwt);
 
         Restaurant restaurant = restaurantService.updateRestaurantStatus(id);
 
@@ -70,7 +70,7 @@ public class AdminRestaurantController {
     @GetMapping("/user")
     public ResponseEntity<Restaurant> findRestaurantByUserId(@RequestHeader("Authorization") String jwt) throws Exception {
 
-        Users user = userService.findUserByJwtToken(jwt);
+        User user = userService.findUserByJwtToken(jwt);
 
         Restaurant restaurant = restaurantService.getRestaurantByUserId(user.getId());
 

@@ -2,14 +2,14 @@ package com.sagar.service.restaurant_services;
 
 import com.sagar.dto.RestaurantDto;
 import com.sagar.model.Restaurant;
-import com.sagar.model.Users;
+import com.sagar.model.User;
 import com.sagar.request.CreateRestaurantRequest;
 
 import java.util.List;
 
 public interface RestaurantService {
 
-    public Restaurant createRestaurant(CreateRestaurantRequest req, Users user);
+    public Restaurant createRestaurant(CreateRestaurantRequest req, User user);
 
     public Restaurant updateRestaurant(Long restaurantId, CreateRestaurantRequest updatedRestaurant) throws Exception;
 
@@ -23,7 +23,7 @@ public interface RestaurantService {
 
     public Restaurant getRestaurantByUserId(Long userId) throws Exception;
 
-    public RestaurantDto addToFavorites(Long restaurantId, Users user) throws Exception;
+    public RestaurantDto addToFavorites(Long restaurantId, User user) throws Exception;
 
     public Restaurant updateRestaurantStatus(Long id) throws Exception;
 

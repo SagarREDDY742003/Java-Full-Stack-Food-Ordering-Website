@@ -1,7 +1,7 @@
 package com.sagar.service;
 
 import com.sagar.model.USER_ROLE;
-import com.sagar.model.Users;
+import com.sagar.model.User;
 import com.sagar.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,7 +28,7 @@ public class CustomeUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
 
         // Fetches the user from the database using their email
-        Users user = userRepository.findByEmail(username);
+        User user = userRepository.findByEmail(username);
 
         // If no user is found, throws an exception that Spring Security will handle (e.g., by rejecting login).
         if(user==null){
